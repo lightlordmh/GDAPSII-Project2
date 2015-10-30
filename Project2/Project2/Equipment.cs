@@ -10,7 +10,7 @@ namespace Project2
         public int Health { get; }
         public int Stamina { get; }
         public int Attack { get; }
-        public int Defense { get; }
+        public int Dodge { get; }
         public int Magic { get; }
 
         public string Type { get; }

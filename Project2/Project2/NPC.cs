@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Project2
 {
-    class Players : Character
+    class NPC : Actor
     {
-        public int ExperienceNeeded { get; set; }
+        //NPC specific data goes here
+
     }
 }

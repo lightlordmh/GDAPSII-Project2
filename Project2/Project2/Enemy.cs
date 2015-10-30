@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project2
 {
-    class Enemy : Character
+    class Enemy : NPC
     {
     }
 }

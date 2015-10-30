@@ -5,31 +5,27 @@ using System.Text;
 
 namespace Project2
 {
-    class Mage : Players
+    class Mage : NPC
     {
-        public Mage(string nameIn, int healthIn, int staminaIn, int attackIn, int defenseIn, int MagicIn)
+        public Mage(string nameIn, int healthIn, int staminaIn, int attackIn, int dodgeIn, int MagicIn)
         {
             Name = nameIn;
             Health = healthIn;
             Stamina = staminaIn;
             Attack = attackIn;
-            Defense = defenseIn;
+            Dodge = dodgeIn;
             Magic = MagicIn;
-            Experience = 0;
-            ExperienceNeeded = 100;
         }
 
         //Default Object
         public Mage()
         {
             Name = "DefaultMage";
-            Health = 80;
-            Stamina = 30;
-            Attack = 10;
-            Defense = 1;
+            Health = 100;
+            Stamina = 100;
+            Attack = 15;
+            Dodge = 4;
             Magic = 250;
-            Experience = 0;
-            ExperienceNeeded = 100;
         }
     }
 }
