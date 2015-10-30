@@ -151,7 +151,6 @@
             this.BossIconLabel.Size = new System.Drawing.Size(51, 13);
             this.BossIconLabel.TabIndex = 5;
             this.BossIconLabel.Text = "BossIcon";
-            this.BossIconLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // openFileDialog1
             // 
