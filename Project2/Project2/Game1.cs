@@ -11,11 +11,23 @@ namespace Project2
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameState currentstate;
+        SpriteFont font;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+        }
+
+        public enum GameState
+        {
+            Menu,
+            HowtoPlay,
+            Themechange,
+            Battle,
+            Campfire,
+            Gameover
         }
 
         /// <summary>
@@ -43,6 +55,8 @@ namespace Project2
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            //sometexturevalue = Content.Load<Texture2D>(@"images/sometexture");
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -66,6 +80,24 @@ namespace Project2
                 Exit();
 
             // TODO: Add your update logic here
+
+            switch (currentstate)
+            {
+
+                case GameState.Battle:
+                    /*
+                    if (mouse click on attack button)
+                    {
+                     *  get damage stat of player object
+                     *  remove x health from monster object
+                     *  (are we doing health bars or just numerical attributes on a styleized heart?)
+                     *  (are we doing a scrolling log for the battle window or a turn based "this is what just happened and will go away for next action" thing?)
+                     *  spriteBatch.DrawString(font, "You deal " + x + " damage to the enemy", new Vector2(chosen location of the battle log on the screen), Color.Black);
+                     *
+                    }
+                    */
+                    break;
+            }
 
             base.Update(gameTime);
         }
