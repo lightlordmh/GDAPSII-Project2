@@ -72,18 +72,18 @@ namespace Project2
             // TODO: use this.Content to load your game content here
 
             //Main Menu Assets
-            main = Content.Load<Texture2D>("MainMenu");
-            start = Content.Load<Texture2D>("Start");
-            exit = Content.Load<Texture2D>("Exit");
-            howPlay = Content.Load<Texture2D>("HowToPlay");
-            rMain = Content.Load<Texture2D>("ReturnMainMenu");
+            main = Content.Load<Texture2D>(@"UI\MainMenu");
+            start = Content.Load<Texture2D>(@"UI\Start");
+            exit = Content.Load<Texture2D>(@"UI\Exit");
+            howPlay = Content.Load<Texture2D>(@"UI\HowToPlay");
+            rMain = Content.Load<Texture2D>(@"UI\ReturnMainMenu");
 
             //Game Assets
-            spell = Content.Load<Texture2D>("SpellBox");
-            comb = Content.Load<Texture2D>("CombatLog");
-            port = Content.Load<Texture2D>("Potrait");
-            bas = Content.Load<Texture2D>("Base");
-            font = Content.Load<SpriteFont>("Font");
+            spell = Content.Load<Texture2D>(@"UI\SpellBox");
+            comb = Content.Load<Texture2D>(@"UI\CombatLog");
+            port = Content.Load<Texture2D>(@"UI\Potrait");
+            bas = Content.Load<Texture2D>(@"UI\Base");
+            font = Content.Load<SpriteFont>(@"UI\Font");
 
             IsMouseVisible = true;
 
