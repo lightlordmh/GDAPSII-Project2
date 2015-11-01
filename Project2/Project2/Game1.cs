@@ -1,6 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Project2
 {
@@ -13,11 +19,17 @@ namespace Project2
         SpriteBatch spriteBatch;
         GameState currentstate;
         SpriteFont font;
+        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas;
+        Button startB, exitB, howPlayB, mainMenuB;
+        List<Button> spells;
+        List<Button> portraits;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferHeight = Stat.CONSOLEH;
+            graphics.PreferredBackBufferWidth = Stat.CONSOLEW;
         }
 
         public enum GameState
@@ -58,6 +70,24 @@ namespace Project2
             //sometexturevalue = Content.Load<Texture2D>(@"images/sometexture");
 
             // TODO: use this.Content to load your game content here
+
+            //Main Menu Assets
+            main = Content.Load<Texture2D>("MainMenu");
+            start = Content.Load<Texture2D>("Start");
+            exit = Content.Load<Texture2D>("Exit");
+            howPlay = Content.Load<Texture2D>("HowToPlay");
+            rMain = Content.Load<Texture2D>("ReturnMainMenu");
+
+            //Game Assets
+            spell = Content.Load<Texture2D>("SpellBox");
+            comb = Content.Load<Texture2D>("CombatLog");
+            port = Content.Load<Texture2D>("Potrait");
+            bas = Content.Load<Texture2D>("Base");
+            font = Content.Load<SpriteFont>("Font");
+
+            IsMouseVisible = true;
+
+            Buttons();
         }
 
         /// <summary>
@@ -79,11 +109,19 @@ namespace Project2
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            MouseState mouse = Mouse.GetState();
+
             // TODO: Add your update logic here
 
             switch (currentstate)
             {
-
+                case GameState.Menu:
+                    MainButtonClick(mouse);
+                    break;
+                case GameState.HowtoPlay:
+                    if (mainMenuB.Click == true) { currentstate = GameState.Menu; }
+                    mainMenuB.ClickUpdate(mouse);
+                    break;
                 case GameState.Battle:
                     /*
                     if (mouse click on attack button)
@@ -112,7 +150,105 @@ namespace Project2
 
             // TODO: Add your drawing code here
 
+            spriteBatch.Begin();
+
+            switch (currentstate)
+            {
+                case GameState.Menu:
+                    //background
+                    Rectangle recM;
+                    spriteBatch.Draw(main, recM = new Rectangle(0, 0, 720, 600), Color.White);
+                    //Start
+                    spriteBatch.Draw(start, startB.Rect, Color.White);
+                    //Exit
+                    spriteBatch.Draw(exit, exitB.Rect, Color.White);
+                    //How to play
+                    spriteBatch.Draw(howPlay, howPlayB.Rect, Color.White);
+                    break;
+                case GameState.HowtoPlay:
+                    spriteBatch.Draw(rMain, mainMenuB.Rect, Color.White);
+
+                    break;
+                case GameState.Battle:
+                    //Draw Base Background
+                    Rectangle recB;
+                    spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    //Draw Combat Log
+                    Rectangle recCL;
+                    spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
+                    //Draw spells
+                    foreach (Button o in spells)
+                    {
+                        spriteBatch.Draw(spell, o.Rect, Color.White);
+                        o.Draw(spriteBatch);
+                    }
+                    //Draw portraits
+                    foreach (Button p in portraits)
+                    {
+                        spriteBatch.Draw(port, p.Rect, Color.White);
+                        p.Draw(spriteBatch);
+                    }
+                    //draw health/mana 100 are place holders
+                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 36), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 72), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 149), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 185), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 298), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 334), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 447), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 483), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 596), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 632), Color.Black);
+                    break;
+            }
+
+            spriteBatch.End();
+
             base.Draw(gameTime);
+        }
+
+        protected void Buttons()
+        {
+            //Game spells
+            spells = new List<Button>();
+            int spellNum = 7;
+            int spellX = 237;
+            int spellY = 453;
+            int i = 0;
+            while (i < spellNum)
+            {
+                spells.Add(new Button(spellX, spellY, Stat.SPELLW, Stat.SPELLH, spell));
+                spellX = spellX + 65;
+                i++;
+            }
+            //Game portraits
+            portraits = new List<Button>();
+            int portNum = 5;
+            int portX = 30;
+            int portY = 31;
+            int e = 0;
+            while (e < portNum)
+            {
+                portraits.Add(new Button(portX, portY, Stat.PORTW, Stat.PORTH, port));
+                portY = portY + 113;
+                e++;
+            }
+
+            //Main Menu/How to Play Buttons
+            startB = new Button(279, 216, 162, 64, start);
+            exitB = new Button(279, 396, 162, 64, exit);
+            howPlayB = new Button(279, 306, 162, 64, howPlay);
+            mainMenuB = new Button(486, 440, 162, 64, rMain);
+        }
+
+        protected void MainButtonClick(MouseState mouse)
+        {
+            if (startB.Click == true) { currentstate = GameState.Battle; }
+            startB.ClickUpdate(mouse);
+            if (exitB.Click == true) { Exit(); }
+            exitB.ClickUpdate(mouse);
+            if (howPlayB.Click == true) { currentstate = GameState.HowtoPlay; }
+            howPlayB.ClickUpdate(mouse);
         }
     }
 }
