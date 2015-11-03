@@ -56,6 +56,7 @@ namespace Project2
             //Creates characters on initalization
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
+            Actor Healer = new Actor("SampleHealer");
         }
 
         /// <summary>
