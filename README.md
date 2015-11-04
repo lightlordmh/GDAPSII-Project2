@@ -10,3 +10,6 @@ Everything set in Stone goes here:
 
 File Names:
 
+
+Inside the Content Folder 
+The themes will  will  reside in their own folders
