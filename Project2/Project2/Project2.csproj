@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Actor.cs" />
     <Compile Include="Button.cs" />
+    <Compile Include="Move.cs" />
     <Compile Include="NPC.cs" />
     <Compile Include="Dps.cs" />
     <Compile Include="Enemy.cs" />

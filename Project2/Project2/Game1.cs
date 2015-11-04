@@ -56,6 +56,7 @@ namespace Project2
             //Creates characters on initalization
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
+            Actor Healer = new Actor("SampleHealer");
         }
 
         /// <summary>
@@ -123,7 +124,8 @@ namespace Project2
                     mainMenuB.ClickUpdate(mouse);
                     break;
                 case GameState.Battle:
-                    /*
+                    SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
+                    /*                        
                     if (mouse click on attack button)
                     {
                      *  get damage stat of player object
@@ -189,16 +191,16 @@ namespace Project2
                         p.Draw(spriteBatch);
                     }
                     //draw health/mana 100 are place holders
-                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 36), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 72), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 149), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 185), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 298), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 334), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 447), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 483), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Health {0}/{1} ", 100, 100), new Vector2(108, 596), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Mana {0}/{1} ", 100, 100), new Vector2(108, 632), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 36), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 64), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 144), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 172), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 258), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 286), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 372), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 400), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
                     break;
             }
 
@@ -249,6 +251,24 @@ namespace Project2
             exitB.ClickUpdate(mouse);
             if (howPlayB.Click == true) { currentstate = GameState.HowtoPlay; }
             howPlayB.ClickUpdate(mouse);
+        }
+
+        protected void SpellButtonClick(MouseState mouse)
+        {
+            //Check if each button and mouse intersect
+            foreach(Button b in spells)
+            {
+                b.ClickUpdate(mouse);
+            }
+            //Insert spell action/logic in brackets
+            if (spells[0].Click == true) { }
+            if (spells[1].Click == true) { }
+            if (spells[2].Click == true) { }
+            if (spells[3].Click == true) { }
+            if (spells[4].Click == true) { }
+            if (spells[5].Click == true) { }
+            if (spells[6].Click == true) { }
+
         }
     }
 }
