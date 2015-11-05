@@ -19,10 +19,11 @@ namespace Project2
         SpriteBatch spriteBatch;
         GameState currentstate;
         SpriteFont font;
-        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas;
+        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB;
         Button startB, exitB, howPlayB, mainMenuB;
         List<Button> spells;
         List<Button> portraits;
+        List<Button> charSelect;
 
         public Game1()
         {
@@ -85,6 +86,7 @@ namespace Project2
             port = Content.Load<Texture2D>(@"UI\Potrait");
             bas = Content.Load<Texture2D>(@"UI\Base");
             font = Content.Load<SpriteFont>(@"UI\Font");
+            invisB = Content.Load<Texture2D>(@"UI\InvisB");
 
             IsMouseVisible = true;
 
@@ -125,6 +127,7 @@ namespace Project2
                     break;
                 case GameState.Battle:
                     SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
+                    CharacterClick(mouse);
                     /*                        
                     if (mouse click on attack button)
                     {
@@ -190,6 +193,12 @@ namespace Project2
                         spriteBatch.Draw(port, p.Rect, Color.White);
                         p.Draw(spriteBatch);
                     }
+                    //Draw invisible buttons
+                    foreach (Button c in charSelect)
+                    {
+                        spriteBatch.Draw(invisB, c.Rect, Color.White);
+                        c.Draw(spriteBatch);
+                    }
                     //draw health/mana 100 are place holders
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 36), Color.Black);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 64), Color.Black);
@@ -235,6 +244,19 @@ namespace Project2
                 portY = portY + 113;
                 e++;
             }
+            //Invisible Character select buttons(for casting spells)
+            charSelect = new List<Button>();
+            int charNum = 5;
+            int charX = 19;
+            int charY = 20;
+            int k = 0;
+            while (k < charNum)
+            {
+                charSelect.Add(new Button(charX, charY, Stat.CHARW, Stat.CHARH, invisB));
+                charY = charY + 111;
+                k++;
+            }
+
 
             //Main Menu/How to Play Buttons
             startB = new Button(279, 216, 162, 64, start);
@@ -269,6 +291,21 @@ namespace Project2
             if (spells[5].Click == true) { }
             if (spells[6].Click == true) { }
 
+        }
+
+        protected void CharacterClick(MouseState mouse)
+        {
+            //Check if each button and mouse intersect
+            foreach (Button b in charSelect)
+            {
+                b.ClickUpdate(mouse);
+            }
+            //insert logic for when character is selected
+            if (charSelect[0].Click == true) { }
+            if (charSelect[1].Click == true) { }
+            if (charSelect[2].Click == true) { }
+            if (charSelect[3].Click == true) { }
+            if (charSelect[4].Click == true) { }
         }
     }
 }

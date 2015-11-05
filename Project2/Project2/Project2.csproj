@@ -90,6 +90,9 @@
     <Content Include="Content\UI\HowToPlay.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\UI\InvisB.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\UI\MainMenu.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
