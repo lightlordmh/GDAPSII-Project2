@@ -7,12 +7,12 @@ namespace Project2
 {
     class Equipment : Items
     {
-        public int Health { get; }
-        public int Stamina { get; }
-        public int Attack { get; }
-        public int Dodge { get; }
-        public int Magic { get; }
+        public int Health { get; set; }
+        public int Stamina { get; set; }
+        public int Attack { get; set; }
+        public int Dodge { get; set; }
+        public int Magic { get; set; }
 
-        public string Type { get; }
+        public string Type { get; set; }
     }
 }

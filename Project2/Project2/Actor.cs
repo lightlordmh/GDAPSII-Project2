@@ -8,10 +8,14 @@ namespace Project2
 {
     class Actor
     {
+        public Actor()
+        {
+
+        }
         //Shared Stats
         public string Name { get; set; }
         public int curHealth { get; set; }
-        public int maxHealth { get; set; }
+        public int Health { get; set; }
         public int Stamina { get; set; }
         public int Attack { get; set; }
         public int Dodge { get; set; }
@@ -55,8 +59,8 @@ namespace Project2
                 if (mySR != null) mySR.Close();
             }
             Name = dataOrganized[0];
-            maxHealth = int.Parse(dataOrganized[1]);
-            curHealth = maxHealth;
+            Health = int.Parse(dataOrganized[1]);
+            curHealth = Health;
             Stamina = int.Parse(dataOrganized[2]);
             Attack = int.Parse(dataOrganized[3]);
             Dodge = int.Parse(dataOrganized[4]);
