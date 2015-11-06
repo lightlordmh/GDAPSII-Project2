@@ -234,7 +234,17 @@ namespace Project2ThemeEditor
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (HealerPortrait.ImageLocation == null | MagePortrait.ImageLocation == null | TankPortrait.ImageLocation == null | WarriorPortrait.ImageLocation == null |
+                Boss1Icon.ImageLocation == null | Boss2Icon.ImageLocation == null | Boss3Icon.ImageLocation == null | Boss4Icon.ImageLocation == null | Boss5Icon.ImageLocation == null |
+                Spell1Icon.ImageLocation == null | NPC1Portrait.ImageLocation == null | NPC2Portrait.ImageLocation == null | NPC3Portrait.ImageLocation == null |
+                Boss1Portrait.ImageLocation == null | Boss2Portrait.ImageLocation == null | Boss3Portrait.ImageLocation == null | MainBackground.ImageLocation == null | ActionWindowBackground.ImageLocation == null)
+            {
+                MessageBox.Show("A picture box has not been filled unable to save");
+            }
+            else
+            {
 
+            }
         }
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)

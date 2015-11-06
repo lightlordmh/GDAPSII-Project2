@@ -152,6 +152,7 @@
             // 
             // HealerPortrait
             // 
+            this.HealerPortrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.HealerPortrait.Location = new System.Drawing.Point(12, 27);
             this.HealerPortrait.Name = "HealerPortrait";
             this.HealerPortrait.Size = new System.Drawing.Size(60, 55);
@@ -161,6 +162,7 @@
             // 
             // Spell1Icon
             // 
+            this.Spell1Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Spell1Icon.Location = new System.Drawing.Point(12, 319);
             this.Spell1Icon.Name = "Spell1Icon";
             this.Spell1Icon.Size = new System.Drawing.Size(56, 51);
@@ -170,6 +172,7 @@
             // 
             // MainBackground
             // 
+            this.MainBackground.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MainBackground.Location = new System.Drawing.Point(338, 27);
             this.MainBackground.Name = "MainBackground";
             this.MainBackground.Size = new System.Drawing.Size(720, 600);
@@ -202,6 +205,7 @@
             // 
             // ActionWindowBackground
             // 
+            this.ActionWindowBackground.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ActionWindowBackground.Location = new System.Drawing.Point(1064, 27);
             this.ActionWindowBackground.Name = "ActionWindowBackground";
             this.ActionWindowBackground.Size = new System.Drawing.Size(483, 394);
@@ -229,6 +233,7 @@
             // 
             // MagePortrait
             // 
+            this.MagePortrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.MagePortrait.Location = new System.Drawing.Point(78, 27);
             this.MagePortrait.Name = "MagePortrait";
             this.MagePortrait.Size = new System.Drawing.Size(60, 55);
@@ -238,6 +243,7 @@
             // 
             // TankPortrait
             // 
+            this.TankPortrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TankPortrait.Location = new System.Drawing.Point(144, 27);
             this.TankPortrait.Name = "TankPortrait";
             this.TankPortrait.Size = new System.Drawing.Size(60, 55);
@@ -265,6 +271,7 @@
             // 
             // WarriorPortrait
             // 
+            this.WarriorPortrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.WarriorPortrait.Location = new System.Drawing.Point(210, 27);
             this.WarriorPortrait.Name = "WarriorPortrait";
             this.WarriorPortrait.Size = new System.Drawing.Size(60, 55);
@@ -283,6 +290,7 @@
             // 
             // Boss1Icon
             // 
+            this.Boss1Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss1Icon.Location = new System.Drawing.Point(12, 117);
             this.Boss1Icon.Name = "Boss1Icon";
             this.Boss1Icon.Size = new System.Drawing.Size(60, 55);
@@ -292,6 +300,7 @@
             // 
             // Boss2Icon
             // 
+            this.Boss2Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss2Icon.Location = new System.Drawing.Point(78, 117);
             this.Boss2Icon.Name = "Boss2Icon";
             this.Boss2Icon.Size = new System.Drawing.Size(60, 55);
@@ -301,6 +310,7 @@
             // 
             // Boss3Icon
             // 
+            this.Boss3Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss3Icon.Location = new System.Drawing.Point(144, 117);
             this.Boss3Icon.Name = "Boss3Icon";
             this.Boss3Icon.Size = new System.Drawing.Size(60, 55);
@@ -310,6 +320,7 @@
             // 
             // Boss4Icon
             // 
+            this.Boss4Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss4Icon.Location = new System.Drawing.Point(210, 117);
             this.Boss4Icon.Name = "Boss4Icon";
             this.Boss4Icon.Size = new System.Drawing.Size(60, 55);
@@ -319,6 +330,7 @@
             // 
             // Boss5Icon
             // 
+            this.Boss5Icon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss5Icon.Location = new System.Drawing.Point(12, 217);
             this.Boss5Icon.Name = "Boss5Icon";
             this.Boss5Icon.Size = new System.Drawing.Size(60, 55);
@@ -373,6 +385,7 @@
             // 
             // NPC1Portrait
             // 
+            this.NPC1Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NPC1Portrait.Location = new System.Drawing.Point(80, 208);
             this.NPC1Portrait.Name = "NPC1Portrait";
             this.NPC1Portrait.Size = new System.Drawing.Size(80, 80);
@@ -382,6 +395,7 @@
             // 
             // NPC2Portrait
             // 
+            this.NPC2Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NPC2Portrait.Location = new System.Drawing.Point(166, 208);
             this.NPC2Portrait.Name = "NPC2Portrait";
             this.NPC2Portrait.Size = new System.Drawing.Size(80, 80);
@@ -391,6 +405,7 @@
             // 
             // NPC3Portrait
             // 
+            this.NPC3Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.NPC3Portrait.Location = new System.Drawing.Point(252, 208);
             this.NPC3Portrait.Name = "NPC3Portrait";
             this.NPC3Portrait.Size = new System.Drawing.Size(80, 80);
@@ -400,6 +415,7 @@
             // 
             // Boss1Portrait
             // 
+            this.Boss1Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss1Portrait.Location = new System.Drawing.Point(12, 424);
             this.Boss1Portrait.Name = "Boss1Portrait";
             this.Boss1Portrait.Size = new System.Drawing.Size(120, 100);
@@ -409,6 +425,7 @@
             // 
             // Boss2Portrait
             // 
+            this.Boss2Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss2Portrait.Location = new System.Drawing.Point(138, 424);
             this.Boss2Portrait.Name = "Boss2Portrait";
             this.Boss2Portrait.Size = new System.Drawing.Size(120, 100);
@@ -418,6 +435,7 @@
             // 
             // Boss3Portrait
             // 
+            this.Boss3Portrait.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Boss3Portrait.Location = new System.Drawing.Point(12, 563);
             this.Boss3Portrait.Name = "Boss3Portrait";
             this.Boss3Portrait.Size = new System.Drawing.Size(120, 100);
@@ -524,7 +542,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(1500, 768);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Theme Editor";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HealerPortrait)).EndInit();
