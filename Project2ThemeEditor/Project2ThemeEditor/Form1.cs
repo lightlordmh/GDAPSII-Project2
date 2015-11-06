@@ -239,11 +239,11 @@ namespace Project2ThemeEditor
                 Spell1Icon.ImageLocation == null | NPC1Portrait.ImageLocation == null | NPC2Portrait.ImageLocation == null | NPC3Portrait.ImageLocation == null |
                 Boss1Portrait.ImageLocation == null | Boss2Portrait.ImageLocation == null | Boss3Portrait.ImageLocation == null | MainBackground.ImageLocation == null | ActionWindowBackground.ImageLocation == null)
             {
-                MessageBox.Show("A picture box has not been filled unable to save");
+                MessageBox.Show("Picture box(es) have not been filled unable to save");
             }
             else
             {
-
+                MessageBox.Show("This Function Has not been implemented yet");
             }
         }
 
