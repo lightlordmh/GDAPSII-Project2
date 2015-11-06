@@ -28,9 +28,7 @@ namespace Project2
         //Background Sprites
         Texture2D DiamondWorld;
         //Actors
-        Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog;
-
-
+        Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog, DragonObj, FrogObj, GenericEnemy;
 
         int turn;
 
@@ -39,13 +37,25 @@ namespace Project2
         List<Button> portraits;
         List<Button> charSelect;
 
+        Move testHeal;
+        Move testBash;
+        Move testCast;
+        Move testSlash;
+        Move testFireBreath;
+        Move testClaw;
+        Move testCannon;
+        Move testHop;
+
+        List<Actor> monsterList;
+        List<Move> enemyAttackList;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = Stat.CONSOLEH;
             graphics.PreferredBackBufferWidth = Stat.CONSOLEW;
-            
+
         }
 
         public enum GameState
@@ -78,13 +88,46 @@ namespace Project2
             MageObj = new Actor("Mage");
             DpsObj = new Actor("Warrior");
 
-            Dragon = new Actor("Dragon");
-            Frog = new Actor("Frog");
-
             HealerObj.ActorFile("Healer");
             TankObj.ActorFile("Tank");
             MageObj.ActorFile("Mage");
             DpsObj.ActorFile("Warrior");
+
+            DragonObj = new Actor("PurpleEvilDragon");
+            FrogObj = new Actor("RobotSnowFrog");
+
+            DragonObj.ActorFile("PurpleEvilDragon");
+            FrogObj.ActorFile("RobotSnowFrog");
+
+            testHeal = new Move("testHeal");
+            testBash = new Move("testBash");
+            testCast = new Move("testCast");
+            testSlash = new Move("testSlash");
+
+            testFireBreath = new Move("testFireBreath");
+            testClaw = new Move("testClaw");
+            testCannon = new Move("testCannon");
+            testHop = new Move("testHop");
+
+            testHeal.MoveRead("testHeal");
+            testBash.MoveRead("testBash");
+            testCast.MoveRead("testCast");
+            testSlash.MoveRead("testSlash");
+
+            testFireBreath.MoveRead("testFireBreath");
+            testClaw.MoveRead("testClaw");
+            testCannon.MoveRead("testCannon");
+            testHop.MoveRead("testHop");
+
+            monsterList = new List<Actor>();
+            monsterList.Add(DragonObj);
+            monsterList.Add(FrogObj);
+
+            enemyAttackList = new List<Move>();
+            enemyAttackList.Add(testFireBreath);
+            enemyAttackList.Add(testClaw);
+            enemyAttackList.Add(testCannon);
+            enemyAttackList.Add(testHop);
 
 
         }
@@ -169,23 +212,67 @@ namespace Project2
                 case GameState.Battle:
                     SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
                     CharacterClick(mouse);
-                    
-                    if(turn == 1)
-                    {
 
+                    Random rand = new Random();
+                    if (HealerObj.curHealth < 0)
+                    {
+                        currentstate = GameState.Menu;
+                    }
+                    if (turn == 0)
+                    {
+                        if (rand.Next(0, 2) == 1)
+                        {
+                            GenericEnemy = FrogObj;
+                            turn = 1;
+                        }
+                        else
+                        {
+                            GenericEnemy = DragonObj;
+                            turn = 1;
+                        }
                     }
 
-                    /*                        
-                    if (mouse click on attack button)
+                    if (turn == 2)
                     {
-                     *  get damage stat of player object
-                     *  remove x health from monster object
-                     *  (are we doing health bars or just numerical attributes on a styleized heart?)
-                     *  (are we doing a scrolling log for the battle window or a turn based "this is what just happened and will go away for next action" thing?)
-                     *  spriteBatch.DrawString(font, "You deal " + x + " damage to the enemy", new Vector2(chosen location of the battle log on the screen), Color.Black);
-                     *
+                        if (TankObj.curHealth > 0)
+                        {
+                            PlayerMove(TankObj, testBash, GenericEnemy);
+                        }
+                        if (MageObj.curHealth > 0)
+                        {
+                            PlayerMove(MageObj, testCast, GenericEnemy);
+                        }
+                        if (DpsObj.curHealth > 0)
+                        {
+                            PlayerMove(DpsObj, testSlash, GenericEnemy);
+                        }
+                        turn = 0;
+                        if (GenericEnemy.curHealth >= 0)
+                        {
+                            if (GenericEnemy == FrogObj)
+                            {
+                                if (rand.Next(0, 2) == 0)
+                                {
+                                    EnemyMove(GenericEnemy, testCannon);
+                                }
+                                else
+                                {
+                                    EnemyMove(GenericEnemy, testHop);
+                                }
+                            }
+                            else if (GenericEnemy == DragonObj)
+                            {
+                                if (rand.Next(0, 2) == 0)
+                                {
+                                    EnemyMove(GenericEnemy, testFireBreath);
+                                }
+                                else
+                                {
+                                    EnemyMove(GenericEnemy, testClaw);
+                                }
+                            }
+                        }
                     }
-                    */
                     break;
             }
 
@@ -227,7 +314,7 @@ namespace Project2
                     //spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
                     Rectangle recCB;
                     spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(234, 19, 454, 334), Color.White);
-                    
+
                     //Draw Combat Log
                     Rectangle recCL;
                     //spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
@@ -238,10 +325,10 @@ namespace Project2
                         o.Draw(spriteBatch);
                     }
                     //Draw Actors
-                    spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White);
-                    spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White);
-                    spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White);
-                    spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White);
+                    if (HealerObj.curHealth > 0 ) { spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White); }
+                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White); }
+                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White); }
+                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White);}
                     //Draw portraits
                     foreach (Button p in portraits)
                     {
@@ -253,6 +340,16 @@ namespace Project2
                     {
                         spriteBatch.Draw(invisB, c.Rect, Color.White);
                         c.Draw(spriteBatch);
+                    }
+                    //draw monsters
+                    if (GenericEnemy == FrogObj)
+                    {
+                        spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 120, 100), Color.White);
+
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 120, 100), Color.White);
                     }
                     //draw health/mana 100 are place holders
                     //tank
@@ -343,13 +440,13 @@ namespace Project2
                 b.ClickUpdate(mouse);
             }
             //Insert spell action/logic in brackets
-            if (spells[0].Click == true) { }
-            if (spells[1].Click == true) { }
-            if (spells[2].Click == true) { }
-            if (spells[3].Click == true) { }
-            if (spells[4].Click == true) { }
-            if (spells[5].Click == true) { }
-            if (spells[6].Click == true) { }
+            if (spells[0].Click == true) { PlayerMove(HealerObj, testHeal, GenericEnemy); turn = 2; spells[0].Click = false; }
+            if (spells[1].Click == true) { HealerObj.curHealth = 0; spells[0].Click = false; }
+            if (spells[2].Click == true) { TankObj.curHealth = 0; spells[0].Click = false; }
+            if (spells[3].Click == true) { turn = 2; spells[0].Click = false; }
+            if (spells[4].Click == true) { turn = 2; spells[0].Click = false; }
+            if (spells[5].Click == true) { turn = 2; spells[0].Click = false; }
+            if (spells[6].Click == true) { turn = 2; spells[0].Click = false; }
 
         }
 
@@ -366,6 +463,131 @@ namespace Project2
             if (charSelect[2].Click == true) { }
             if (charSelect[3].Click == true) { }
             if (charSelect[4].Click == true) { }
+            }
+
+        private void PlayerMove(Actor User, Move moveName, Actor Enemy)
+        {
+            int damageDealt;
+            Random rand = new Random();
+            if (moveName.Type == "Physical")
+            {
+                damageDealt = User.Attack / 100 * moveName.Attack;
+                if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
+                {
+                    damageDealt = 0;
+                }
+                Enemy.curHealth -= damageDealt;
+            }
+            else if (moveName.Type == "Magical")
+            {
+                damageDealt = User.Magic / 100 * moveName.Attack;
+                if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
+                {
+                    damageDealt = 0;
+                }
+                Enemy.curHealth -= damageDealt;
+            }
+            else
+            {
+                damageDealt = moveName.Attack;
+                if (rand.Next(0, 100) >= moveName.Accuracy)
+                {
+                    damageDealt = 0;
+                }
+                HealerObj.curHealth -= damageDealt;
+                if (TankObj.curHealth > 0)
+                {
+                    TankObj.curHealth -= damageDealt;
+                }
+                if (MageObj.curHealth > 0)
+                {
+                    MageObj.curHealth -= damageDealt;
+                }
+                if (DpsObj.curHealth > 0)
+                {
+                    DpsObj.curHealth -= damageDealt;
+                }
+
+
+
+            }
+        }
+
+        private void EnemyMove(Actor User, Move moveName)
+        {
+            int damageDealt;
+            Random rand = new Random();
+            damageDealt = User.Attack / 100 * moveName.Attack;
+            if (moveName.Aoe)
+            {
+                //Check if it hits
+                if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
+                {
+                    HealerObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
+                {
+                    TankObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
+                {
+                    MageObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
+                {
+                    DpsObj.curHealth -= damageDealt;
+                }
+            }
+            if (moveName.Aoe)
+            {
+                //Check if it hits
+                if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
+                {
+                    HealerObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
+                {
+                    TankObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
+                {
+                    MageObj.curHealth -= damageDealt;
+                }
+                if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
+                {
+                    DpsObj.curHealth -= damageDealt;
+                }
+            }
+            else
+            {
+                switch (rand.Next(0, 4))
+                {
+                    case 0:
+                        if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
+                        {
+                            HealerObj.curHealth -= damageDealt;
+                        }
+                        break;
+                    case 1:
+                        if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
+                        {
+                            TankObj.curHealth -= damageDealt;
+                        }
+                        break;
+                    case 2:
+                        if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
+                        {
+                            MageObj.curHealth -= damageDealt;
+                        }
+                        break;
+                    case 3:
+                        if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
+                        {
+                            DpsObj.curHealth -= damageDealt;
+                        }
+                        break;
+                }
+            }
         }
     }
 }

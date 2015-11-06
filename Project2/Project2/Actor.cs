@@ -18,6 +18,7 @@ namespace Project2
         public int Dodge { get; set; }
         public int Magic { get; set; }
         public int Experience { get; set; }
+        public bool IsPlayer { get; set; }
 
         //Status Aligments
         public bool Poisoned { get; set; }

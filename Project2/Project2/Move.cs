@@ -23,15 +23,22 @@ namespace Project2
         public string Name { get; set; }
 
         public string FlavorText { get; set; }
+        public string Type { get; set; } //Physical, Magical, Status
 
         private List<string> moveData;
 
 
         public Move(string moveName)
         {
+
+        }
+
+        public void MoveRead(string moveName)
+        {
             StreamReader mySR = null;
             try
             {
+                moveData = new List<string>();
                 mySR = new StreamReader("Actor.txt");
                 string line;
                 while ((line = mySR.ReadLine()) != moveName)
@@ -50,7 +57,7 @@ namespace Project2
                 Status = moveData[5];
                 Aoe = bool.Parse(moveData[6]);
                 FlavorText = moveData[7];
-
+                Type = moveData[8];
             }
             catch
             {
