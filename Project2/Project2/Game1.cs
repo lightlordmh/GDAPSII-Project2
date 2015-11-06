@@ -98,7 +98,7 @@ namespace Project2
 
             //Players Sprites
             Healer = Content.Load<Texture2D>(@"ActorSprites\Healer");
-            Mage = Content.Load<Texture2D>(@"ActorSprites\Mager");
+            Mage = Content.Load<Texture2D>(@"ActorSprites\Mage");
             Tank = Content.Load<Texture2D>(@"ActorSprites\Tank");
             Dps = Content.Load<Texture2D>(@"ActorSprites\Warrior"); //slight filename change
             //Enemies Sprites
@@ -197,7 +197,7 @@ namespace Project2
                 case GameState.Battle:
                     //Draw Base Background
                     Rectangle recB;
-                    spriteBatch.Draw(DiamondWorld, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    spriteBatch.Draw(comb, recB = new Rectangle(0, 0, 720, 600), Color.White);
                     //Draw Combat Log
                     Rectangle recCL;
                     spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);

@@ -129,16 +129,6 @@
 /processorParam:TextureFormat=Color
 /build:UI/InvisB.png
 
-#begin Actor.txt
-/importer:
-/processor:
-/build:Actor.txt
-
-#begin Move.txt
-/importer:
-/processor:
-/build:Move.txt
-
 #begin IconSprites/BlackPetalBottle.png
 /importer:TextureImporter
 /processor:TextureProcessor

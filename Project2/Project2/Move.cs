@@ -42,6 +42,14 @@ namespace Project2
                 {
                     moveData.Add(line);
                 }
+                Name = moveName;
+                Attack = int.Parse(moveData[1]);
+                Accuracy = int.Parse(moveData[2]);
+                StaminaCost = int.Parse(moveData[3]);
+                StatusChance = int.Parse(moveData[4]);
+                Status = moveData[5];
+                Aoe = bool.Parse(moveData[6]);
+                FlavorText = moveData[7];
 
             }
             catch
@@ -52,15 +60,6 @@ namespace Project2
             {
                 if (mySR != null) mySR.Close();
             }
-
-            Name = moveName;
-            Attack = int.Parse(moveData[1]);
-            Accuracy = int.Parse(moveData[2]);
-            StaminaCost = int.Parse(moveData[3]);
-            StatusChance = int.Parse(moveData[4]);
-            Status = moveData[5];
-            Aoe = bool.Parse(moveData[6]);
-            FlavorText = moveData[7];
         }
     }
 }

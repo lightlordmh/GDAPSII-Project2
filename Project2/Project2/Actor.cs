@@ -8,10 +8,6 @@ namespace Project2
 {
     class Actor
     {
-        public Actor()
-        {
-
-        }
         //Shared Stats
         public string Name { get; set; }
         public int curHealth { get; set; }
@@ -22,12 +18,6 @@ namespace Project2
         public int Magic { get; set; }
         public int Experience { get; set; }
 
-        //List of stats
-        private List<string> dataOrganized;
-        //List of moves
-        private List<string> moveList;
-
-
         //Status Aligments
         public bool Poisoned { get; set; }
         public bool Burned { get; set; }
@@ -35,6 +25,8 @@ namespace Project2
 
         public Actor(string actorName)
         {
+            List<string> dataOrganized = new List<string>();
+            List<string> moveList = new List<string>();
             StreamReader mySR = null;
             try
             {
@@ -48,7 +40,14 @@ namespace Project2
                 {
                         dataOrganized.Add(line);
                 }
-
+                Name = dataOrganized[0];
+                Health = int.Parse(dataOrganized[1]);
+                curHealth = Health;
+                Stamina = int.Parse(dataOrganized[2]);
+                Attack = int.Parse(dataOrganized[3]);
+                Dodge = int.Parse(dataOrganized[4]);
+                Magic = int.Parse(dataOrganized[5]);
+                Experience = int.Parse(dataOrganized[6]);
             }
             catch
             {
@@ -58,14 +57,7 @@ namespace Project2
             {
                 if (mySR != null) mySR.Close();
             }
-            Name = dataOrganized[0];
-            Health = int.Parse(dataOrganized[1]);
-            curHealth = Health;
-            Stamina = int.Parse(dataOrganized[2]);
-            Attack = int.Parse(dataOrganized[3]);
-            Dodge = int.Parse(dataOrganized[4]);
-            Magic = int.Parse(dataOrganized[5]);
-            Experience = int.Parse(dataOrganized[6]);
+
 
             //Sets up move list so characters can pull from common move .txt
             for(int j = 0; j < dataOrganized.Count() - 7;j++)
