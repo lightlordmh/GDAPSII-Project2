@@ -246,7 +246,7 @@ namespace Project2
                         {
                             PlayerMove(DpsObj, testSlash, GenericEnemy);
                         }
-                        turn = 0;
+                        turn = 1;
                         if (GenericEnemy.curHealth >= 0)
                         {
                             if (GenericEnemy == FrogObj)
@@ -518,26 +518,6 @@ namespace Project2
             int damageDealt;
             Random rand = new Random();
             damageDealt = User.Attack / 100 * moveName.Attack;
-            if (moveName.Aoe)
-            {
-                //Check if it hits
-                if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
-                {
-                    HealerObj.curHealth -= damageDealt;
-                }
-                if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
-                {
-                    TankObj.curHealth -= damageDealt;
-                }
-                if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
-                {
-                    MageObj.curHealth -= damageDealt;
-                }
-                if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
-                {
-                    DpsObj.curHealth -= damageDealt;
-                }
-            }
             if (moveName.Aoe)
             {
                 //Check if it hits

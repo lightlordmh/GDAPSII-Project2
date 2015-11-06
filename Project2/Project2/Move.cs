@@ -39,7 +39,7 @@ namespace Project2
             try
             {
                 moveData = new List<string>();
-                mySR = new StreamReader("Actor.txt");
+                mySR = new StreamReader("Move.txt");
                 string line;
                 while ((line = mySR.ReadLine()) != moveName)
                 {
@@ -47,7 +47,11 @@ namespace Project2
                 }
                 while ((line = mySR.ReadLine()) != null)
                 {
-                    moveData.Add(line);
+                    if(line != null | line != "Z")
+                    {
+                        moveData.Add(line);
+                    }
+                   
                 }
                 Name = moveName;
                 Attack = int.Parse(moveData[1]);
