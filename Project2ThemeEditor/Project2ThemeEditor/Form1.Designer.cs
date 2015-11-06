@@ -30,20 +30,19 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HealerPortrait = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.Spell1Icon = new System.Windows.Forms.PictureBox();
+            this.MainBackground = new System.Windows.Forms.PictureBox();
             this.BossIconLabel = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.HealerIconLabel = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.ActionWindowBackground = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.MagePortrait = new System.Windows.Forms.PictureBox();
@@ -66,19 +65,19 @@
             this.NPC2Portrait = new System.Windows.Forms.PictureBox();
             this.NPC3Portrait = new System.Windows.Forms.PictureBox();
             this.Boss1Portrait = new System.Windows.Forms.PictureBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.Boss2Portrait = new System.Windows.Forms.PictureBox();
+            this.Boss3Portrait = new System.Windows.Forms.PictureBox();
             this.NPC1Label = new System.Windows.Forms.Label();
             this.NPC2Label = new System.Windows.Forms.Label();
             this.NPC3Label = new System.Windows.Forms.Label();
             this.Boss1PortraitLabel = new System.Windows.Forms.Label();
-            this.Boss2Portrait = new System.Windows.Forms.Label();
-            this.Boss3Portrait = new System.Windows.Forms.Label();
+            this.Boss2PortraitLabel = new System.Windows.Forms.Label();
+            this.Boss3PortraitLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HealerPortrait)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Spell1Icon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBackground)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActionWindowBackground)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.MagePortrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TankPortrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarriorPortrait)).BeginInit();
@@ -91,8 +90,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NPC2Portrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC3Portrait)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Boss1Portrait)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Boss2Portrait)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Boss3Portrait)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -109,7 +108,6 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem,
             this.openToolStripMenuItem,
             this.saveToolStripMenuItem,
             this.closeToolStripMenuItem});
@@ -117,29 +115,26 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // newToolStripMenuItem
-            // 
-            this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.newToolStripMenuItem.Text = "New";
-            // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -162,22 +157,25 @@
             this.HealerPortrait.Size = new System.Drawing.Size(60, 55);
             this.HealerPortrait.TabIndex = 1;
             this.HealerPortrait.TabStop = false;
+            this.HealerPortrait.Click += new System.EventHandler(this.HealerPortrait_Click);
             // 
-            // pictureBox2
+            // Spell1Icon
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(12, 319);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(56, 51);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
+            this.Spell1Icon.Location = new System.Drawing.Point(12, 319);
+            this.Spell1Icon.Name = "Spell1Icon";
+            this.Spell1Icon.Size = new System.Drawing.Size(56, 51);
+            this.Spell1Icon.TabIndex = 2;
+            this.Spell1Icon.TabStop = false;
+            this.Spell1Icon.Click += new System.EventHandler(this.Spell1Icon_Click);
             // 
-            // pictureBox4
+            // MainBackground
             // 
-            this.pictureBox4.Location = new System.Drawing.Point(338, 27);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(720, 600);
-            this.pictureBox4.TabIndex = 4;
-            this.pictureBox4.TabStop = false;
+            this.MainBackground.Location = new System.Drawing.Point(338, 27);
+            this.MainBackground.Name = "MainBackground";
+            this.MainBackground.Size = new System.Drawing.Size(720, 600);
+            this.MainBackground.TabIndex = 4;
+            this.MainBackground.TabStop = false;
+            this.MainBackground.Click += new System.EventHandler(this.MainBackground_Click);
             // 
             // BossIconLabel
             // 
@@ -191,6 +189,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.Filter = "\"PNG files (*png)|*.png|All files (*.*)|*.*\"";
             // 
             // HealerIconLabel
             // 
@@ -201,13 +200,14 @@
             this.HealerIconLabel.TabIndex = 6;
             this.HealerIconLabel.Text = "Healer icon";
             // 
-            // pictureBox3
+            // ActionWindowBackground
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(1064, 27);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(483, 394);
-            this.pictureBox3.TabIndex = 7;
-            this.pictureBox3.TabStop = false;
+            this.ActionWindowBackground.Location = new System.Drawing.Point(1064, 27);
+            this.ActionWindowBackground.Name = "ActionWindowBackground";
+            this.ActionWindowBackground.Size = new System.Drawing.Size(483, 394);
+            this.ActionWindowBackground.TabIndex = 7;
+            this.ActionWindowBackground.TabStop = false;
+            this.ActionWindowBackground.Click += new System.EventHandler(this.ActionWindowBackground_Click);
             // 
             // label1
             // 
@@ -234,6 +234,7 @@
             this.MagePortrait.Size = new System.Drawing.Size(60, 55);
             this.MagePortrait.TabIndex = 10;
             this.MagePortrait.TabStop = false;
+            this.MagePortrait.Click += new System.EventHandler(this.MagePortrait_Click);
             // 
             // TankPortrait
             // 
@@ -242,6 +243,7 @@
             this.TankPortrait.Size = new System.Drawing.Size(60, 55);
             this.TankPortrait.TabIndex = 11;
             this.TankPortrait.TabStop = false;
+            this.TankPortrait.Click += new System.EventHandler(this.TankPortrait_Click);
             // 
             // MageIconLabel
             // 
@@ -268,6 +270,7 @@
             this.WarriorPortrait.Size = new System.Drawing.Size(60, 55);
             this.WarriorPortrait.TabIndex = 14;
             this.WarriorPortrait.TabStop = false;
+            this.WarriorPortrait.Click += new System.EventHandler(this.WarriorPortrait_Click);
             // 
             // WarriorIconLabel
             // 
@@ -285,6 +288,7 @@
             this.Boss1Icon.Size = new System.Drawing.Size(60, 55);
             this.Boss1Icon.TabIndex = 16;
             this.Boss1Icon.TabStop = false;
+            this.Boss1Icon.Click += new System.EventHandler(this.Boss1Icon_Click);
             // 
             // Boss2Icon
             // 
@@ -293,6 +297,7 @@
             this.Boss2Icon.Size = new System.Drawing.Size(60, 55);
             this.Boss2Icon.TabIndex = 17;
             this.Boss2Icon.TabStop = false;
+            this.Boss2Icon.Click += new System.EventHandler(this.Boss2Icon_Click);
             // 
             // Boss3Icon
             // 
@@ -301,6 +306,7 @@
             this.Boss3Icon.Size = new System.Drawing.Size(60, 55);
             this.Boss3Icon.TabIndex = 18;
             this.Boss3Icon.TabStop = false;
+            this.Boss3Icon.Click += new System.EventHandler(this.Boss3Icon_Click);
             // 
             // Boss4Icon
             // 
@@ -309,6 +315,7 @@
             this.Boss4Icon.Size = new System.Drawing.Size(60, 55);
             this.Boss4Icon.TabIndex = 19;
             this.Boss4Icon.TabStop = false;
+            this.Boss4Icon.Click += new System.EventHandler(this.Boss4Icon_Click);
             // 
             // Boss5Icon
             // 
@@ -317,6 +324,7 @@
             this.Boss5Icon.Size = new System.Drawing.Size(60, 55);
             this.Boss5Icon.TabIndex = 20;
             this.Boss5Icon.TabStop = false;
+            this.Boss5Icon.Click += new System.EventHandler(this.Boss5Icon_Click);
             // 
             // Boss1IconLabel
             // 
@@ -370,6 +378,7 @@
             this.NPC1Portrait.Size = new System.Drawing.Size(80, 80);
             this.NPC1Portrait.TabIndex = 26;
             this.NPC1Portrait.TabStop = false;
+            this.NPC1Portrait.Click += new System.EventHandler(this.NPC1Portrait_Click);
             // 
             // NPC2Portrait
             // 
@@ -378,6 +387,7 @@
             this.NPC2Portrait.Size = new System.Drawing.Size(80, 80);
             this.NPC2Portrait.TabIndex = 27;
             this.NPC2Portrait.TabStop = false;
+            this.NPC2Portrait.Click += new System.EventHandler(this.NPC2Portrait_Click);
             // 
             // NPC3Portrait
             // 
@@ -386,6 +396,7 @@
             this.NPC3Portrait.Size = new System.Drawing.Size(80, 80);
             this.NPC3Portrait.TabIndex = 28;
             this.NPC3Portrait.TabStop = false;
+            this.NPC3Portrait.Click += new System.EventHandler(this.NPC3Portrait_Click);
             // 
             // Boss1Portrait
             // 
@@ -394,22 +405,25 @@
             this.Boss1Portrait.Size = new System.Drawing.Size(120, 100);
             this.Boss1Portrait.TabIndex = 29;
             this.Boss1Portrait.TabStop = false;
+            this.Boss1Portrait.Click += new System.EventHandler(this.Boss1Portrait_Click);
             // 
-            // pictureBox8
+            // Boss2Portrait
             // 
-            this.pictureBox8.Location = new System.Drawing.Point(138, 424);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(120, 100);
-            this.pictureBox8.TabIndex = 30;
-            this.pictureBox8.TabStop = false;
+            this.Boss2Portrait.Location = new System.Drawing.Point(138, 424);
+            this.Boss2Portrait.Name = "Boss2Portrait";
+            this.Boss2Portrait.Size = new System.Drawing.Size(120, 100);
+            this.Boss2Portrait.TabIndex = 30;
+            this.Boss2Portrait.TabStop = false;
+            this.Boss2Portrait.Click += new System.EventHandler(this.Boss2Portrait_Click);
             // 
-            // pictureBox9
+            // Boss3Portrait
             // 
-            this.pictureBox9.Location = new System.Drawing.Point(12, 563);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(120, 100);
-            this.pictureBox9.TabIndex = 31;
-            this.pictureBox9.TabStop = false;
+            this.Boss3Portrait.Location = new System.Drawing.Point(12, 563);
+            this.Boss3Portrait.Name = "Boss3Portrait";
+            this.Boss3Portrait.Size = new System.Drawing.Size(120, 100);
+            this.Boss3Portrait.TabIndex = 31;
+            this.Boss3Portrait.TabStop = false;
+            this.Boss3Portrait.Click += new System.EventHandler(this.Boss3Portrait_Click);
             // 
             // NPC1Label
             // 
@@ -447,37 +461,37 @@
             this.Boss1PortraitLabel.TabIndex = 35;
             this.Boss1PortraitLabel.Text = "Boss 1 Portrait";
             // 
-            // Boss2Portrait
+            // Boss2PortraitLabel
             // 
-            this.Boss2Portrait.AutoSize = true;
-            this.Boss2Portrait.Location = new System.Drawing.Point(163, 527);
-            this.Boss2Portrait.Name = "Boss2Portrait";
-            this.Boss2Portrait.Size = new System.Drawing.Size(75, 13);
-            this.Boss2Portrait.TabIndex = 36;
-            this.Boss2Portrait.Text = "Boss 2 Portrait";
+            this.Boss2PortraitLabel.AutoSize = true;
+            this.Boss2PortraitLabel.Location = new System.Drawing.Point(163, 527);
+            this.Boss2PortraitLabel.Name = "Boss2PortraitLabel";
+            this.Boss2PortraitLabel.Size = new System.Drawing.Size(75, 13);
+            this.Boss2PortraitLabel.TabIndex = 36;
+            this.Boss2PortraitLabel.Text = "Boss 2 Portrait";
             // 
-            // Boss3Portrait
+            // Boss3PortraitLabel
             // 
-            this.Boss3Portrait.AutoSize = true;
-            this.Boss3Portrait.Location = new System.Drawing.Point(32, 666);
-            this.Boss3Portrait.Name = "Boss3Portrait";
-            this.Boss3Portrait.Size = new System.Drawing.Size(75, 13);
-            this.Boss3Portrait.TabIndex = 37;
-            this.Boss3Portrait.Text = "Boss 3 Portrait";
+            this.Boss3PortraitLabel.AutoSize = true;
+            this.Boss3PortraitLabel.Location = new System.Drawing.Point(32, 666);
+            this.Boss3PortraitLabel.Name = "Boss3PortraitLabel";
+            this.Boss3PortraitLabel.Size = new System.Drawing.Size(75, 13);
+            this.Boss3PortraitLabel.TabIndex = 37;
+            this.Boss3PortraitLabel.Text = "Boss 3 Portrait";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1559, 729);
-            this.Controls.Add(this.Boss3Portrait);
-            this.Controls.Add(this.Boss2Portrait);
+            this.Controls.Add(this.Boss3PortraitLabel);
+            this.Controls.Add(this.Boss2PortraitLabel);
             this.Controls.Add(this.Boss1PortraitLabel);
             this.Controls.Add(this.NPC3Label);
             this.Controls.Add(this.NPC2Label);
             this.Controls.Add(this.NPC1Label);
-            this.Controls.Add(this.pictureBox9);
-            this.Controls.Add(this.pictureBox8);
+            this.Controls.Add(this.Boss3Portrait);
+            this.Controls.Add(this.Boss2Portrait);
             this.Controls.Add(this.Boss1Portrait);
             this.Controls.Add(this.NPC3Portrait);
             this.Controls.Add(this.NPC2Portrait);
@@ -500,11 +514,11 @@
             this.Controls.Add(this.MagePortrait);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.pictureBox3);
+            this.Controls.Add(this.ActionWindowBackground);
             this.Controls.Add(this.HealerIconLabel);
             this.Controls.Add(this.BossIconLabel);
-            this.Controls.Add(this.pictureBox4);
-            this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.MainBackground);
+            this.Controls.Add(this.Spell1Icon);
             this.Controls.Add(this.HealerPortrait);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -514,9 +528,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.HealerPortrait)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Spell1Icon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.MainBackground)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ActionWindowBackground)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.MagePortrait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TankPortrait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.WarriorPortrait)).EndInit();
@@ -529,8 +543,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.NPC2Portrait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NPC3Portrait)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Boss1Portrait)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Boss2Portrait)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Boss3Portrait)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -542,18 +556,17 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.PictureBox HealerPortrait;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.PictureBox pictureBox4;
+        private System.Windows.Forms.PictureBox Spell1Icon;
+        private System.Windows.Forms.PictureBox MainBackground;
         private System.Windows.Forms.Label BossIconLabel;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.Label HealerIconLabel;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox ActionWindowBackground;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox MagePortrait;
@@ -576,14 +589,14 @@
         private System.Windows.Forms.PictureBox NPC2Portrait;
         private System.Windows.Forms.PictureBox NPC3Portrait;
         private System.Windows.Forms.PictureBox Boss1Portrait;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.PictureBox Boss2Portrait;
+        private System.Windows.Forms.PictureBox Boss3Portrait;
         private System.Windows.Forms.Label NPC1Label;
         private System.Windows.Forms.Label NPC2Label;
         private System.Windows.Forms.Label NPC3Label;
         private System.Windows.Forms.Label Boss1PortraitLabel;
-        private System.Windows.Forms.Label Boss2Portrait;
-        private System.Windows.Forms.Label Boss3Portrait;
+        private System.Windows.Forms.Label Boss2PortraitLabel;
+        private System.Windows.Forms.Label Boss3PortraitLabel;
     }
 }
 
