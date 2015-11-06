@@ -56,19 +56,13 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Button.cs" />
     <Compile Include="Move.cs" />
-    <Compile Include="NPC.cs" />
-    <Compile Include="Dps.cs" />
-    <Compile Include="Enemy.cs" />
     <Compile Include="Equipment.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Items.cs" />
-    <Compile Include="Mage.cs" />
-    <Compile Include="Player.cs" />
     <Compile Include="Potions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Stat.cs" />
-    <Compile Include="Tank.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

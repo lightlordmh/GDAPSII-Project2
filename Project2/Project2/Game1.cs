@@ -19,7 +19,15 @@ namespace Project2
         SpriteBatch spriteBatch;
         GameState currentstate;
         SpriteFont font;
+        //UI Sprites
         Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB;
+        //Player Sprites
+        Texture2D Healer, Mage, Tank, Dps;
+        //Enemy Sprites
+        Texture2D PurpleEvilDragon, RobotSnowFrog;
+        //Background Sprites
+        Texture2D DiamondWorld;
+
         Button startB, exitB, howPlayB, mainMenuB;
         List<Button> spells;
         List<Button> portraits;
@@ -87,6 +95,18 @@ namespace Project2
             bas = Content.Load<Texture2D>(@"UI\Base");
             font = Content.Load<SpriteFont>(@"UI\Font");
             invisB = Content.Load<Texture2D>(@"UI\InvisB");
+
+            //Players Sprites
+            Healer = Content.Load<Texture2D>(@"ActorSprites\Healer");
+            Mage = Content.Load<Texture2D>(@"ActorSprites\Mager");
+            Tank = Content.Load<Texture2D>(@"ActorSprites\Tank");
+            Dps = Content.Load<Texture2D>(@"ActorSprites\Warrior"); //slight filename change
+            //Enemies Sprites
+            PurpleEvilDragon = Content.Load<Texture2D>(@"ActorSprites\PurpleEvilDragon");
+            RobotSnowFrog = Content.Load<Texture2D>(@"ActorSprites\RobotSnowFrog");
+
+            //Background
+            DiamondWorld = Content.Load<Texture2D>(@"BackgroundSprites\DiamondWORLD"); //slight filename change
 
             IsMouseVisible = true;
 
@@ -177,7 +197,7 @@ namespace Project2
                 case GameState.Battle:
                     //Draw Base Background
                     Rectangle recB;
-                    spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    spriteBatch.Draw(DiamondWorld, recB = new Rectangle(0, 0, 720, 600), Color.White);
                     //Draw Combat Log
                     Rectangle recCL;
                     spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
