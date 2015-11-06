@@ -45,6 +45,7 @@ namespace Project2
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = Stat.CONSOLEH;
             graphics.PreferredBackBufferWidth = Stat.CONSOLEW;
+            
         }
 
         public enum GameState
@@ -79,6 +80,13 @@ namespace Project2
 
             Dragon = new Actor("Dragon");
             Frog = new Actor("Frog");
+
+            HealerObj.ActorFile("Healer");
+            TankObj.ActorFile("Tank");
+            MageObj.ActorFile("Mage");
+            DpsObj.ActorFile("Warrior");
+
+
         }
 
         /// <summary>

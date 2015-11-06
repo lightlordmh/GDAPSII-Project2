@@ -24,31 +24,41 @@ namespace Project2
         public bool Burned { get; set; }
         public bool Stun { get; set; }
 
+        List<string> dataOrganized, moveList;
+
         public Actor(string actorName)
         {
-            List<string> dataOrganized = new List<string>();
-            List<string> moveList = new List<string>();
+            dataOrganized = new List<string>();
+            moveList = new List<string>();
+
+        }
+
+        public void ActorFile(string actorName)
+        {
             StreamReader mySR = null;
             try
             {
                 mySR = new StreamReader("Actor.txt");
                 string line;
-                while((line = mySR.ReadLine()) != actorName)
+                while ((line = mySR.ReadLine()) != actorName)
                 {
                     //Skip all character data before specified character
                 }
-                while((line = mySR.ReadLine()) != null)
+                int i = 0;
+                while ((line = mySR.ReadLine()) != null && i<5)
                 {
-                        dataOrganized.Add(line);
+                    dataOrganized.Add(line);
+                    i++;
                 }
-                Name = dataOrganized[0];
-                Health = int.Parse(dataOrganized[1]);
+                //Name = dataOrganized[0];
+                Health = int.Parse(dataOrganized[0]);
                 curHealth = Health;
-                Stamina = int.Parse(dataOrganized[2]);
-                Attack = int.Parse(dataOrganized[3]);
-                Dodge = int.Parse(dataOrganized[4]);
-                Magic = int.Parse(dataOrganized[5]);
-                Experience = int.Parse(dataOrganized[6]);
+                Stamina = int.Parse(dataOrganized[1]);
+                curStamina = Stamina;
+                Attack = int.Parse(dataOrganized[2]);
+                Dodge = int.Parse(dataOrganized[3]);
+                Magic = int.Parse(dataOrganized[4]);
+                Experience = int.Parse(dataOrganized[5]);
             }
             catch
             {
@@ -61,7 +71,7 @@ namespace Project2
 
 
             //Sets up move list so characters can pull from common move .txt
-            for(int j = 0; j < dataOrganized.Count() - 7;j++)
+            for (int j = 0; j < dataOrganized.Count() - 7; j++)
             {
                 moveList[j] = dataOrganized[j + 7];
             }
