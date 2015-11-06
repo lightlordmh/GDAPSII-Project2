@@ -13,6 +13,7 @@ namespace Project2
         public int curHealth { get; set; }
         public int Health { get; set; }
         public int Stamina { get; set; }
+        public int curStamina { get; set; }
         public int Attack { get; set; }
         public int Dodge { get; set; }
         public int Magic { get; set; }

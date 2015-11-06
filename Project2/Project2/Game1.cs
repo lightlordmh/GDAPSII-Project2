@@ -27,6 +27,10 @@ namespace Project2
         Texture2D PurpleEvilDragon, RobotSnowFrog;
         //Background Sprites
         Texture2D DiamondWorld;
+        //Actors
+        Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog;
+
+
 
         int turn;
 
@@ -68,13 +72,13 @@ namespace Project2
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
             turn = 0;
-            Actor HealerObj = new Actor("Healer");
-            Actor TankObj = new Actor("Tank");
-            Actor MageObj = new Actor("Mage");
-            Actor DpsObj = new Actor("Warrior");
+            HealerObj = new Actor("Healer");
+            TankObj = new Actor("Tank");
+            MageObj = new Actor("Mage");
+            DpsObj = new Actor("Warrior");
 
-            Actor Dragon = new Actor("Dragon");
-            Actor Frog = new Actor("Frog");
+            Dragon = new Actor("Dragon");
+            Frog = new Actor("Frog");
         }
 
         /// <summary>
@@ -243,14 +247,19 @@ namespace Project2
                         c.Draw(spriteBatch);
                     }
                     //draw health/mana 100 are place holders
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 36), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 64), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 144), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 172), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 258), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 286), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 372), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 400), Color.Black);
+                    //tank
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 36), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 64), Color.Black);
+                    //mage
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 144), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 172), Color.Black);
+                    //warrior
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 258), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 286), Color.Black);
+                    //healer
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 372), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Stamina, HealerObj.curStamina), new Vector2(100, 400), Color.Black);
+                    //empty?
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
                     break;
