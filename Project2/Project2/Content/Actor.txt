@@ -12,7 +12,7 @@ move2
 move3... etc.
 //Space here to signify new actor
 
-testHealer
+Healer
 160
 120
 40
@@ -21,7 +21,7 @@ testHealer
 100
 testHeal
 
-testTank
+Tank
 200
 50
 40
@@ -30,7 +30,7 @@ testTank
 100
 testBash
 
-testMage
+Mage
 80
 100
 20
@@ -39,7 +39,7 @@ testMage
 100
 testCast
 
-testDps
+Warrior
 100
 100
 100
@@ -50,7 +50,7 @@ testSlash
 
 //Enemies:
 
-Dragon
+PurpleEvilDragon
 500
 100
 50
@@ -60,7 +60,7 @@ Dragon
 testFireBreath
 testClaw
 
-Frog
+RobotSnowFrog
 400
 200
 40
