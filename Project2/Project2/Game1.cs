@@ -28,6 +28,8 @@ namespace Project2
         //Background Sprites
         Texture2D DiamondWorld;
 
+        int turn; //0 for players, 1 for enemy
+
         Button startB, exitB, howPlayB, mainMenuB;
         List<Button> spells;
         List<Button> portraits;
@@ -66,6 +68,11 @@ namespace Project2
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
             Actor Healer = new Actor("testHealer");
+            Actor Tank = new Actor("testTank");
+            Actor Mage = new Actor("testMage");
+            Actor Dps = new Actor("testDps");
+
+            turn = 0;
         }
 
         /// <summary>
@@ -148,6 +155,14 @@ namespace Project2
                 case GameState.Battle:
                     SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
                     CharacterClick(mouse);
+
+                    
+                    if(turn == 1)
+                    {
+
+
+                    }
+
                     /*                        
                     if (mouse click on attack button)
                     {
@@ -202,11 +217,15 @@ namespace Project2
                     Rectangle recCL;
                     spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
                     //Draw spells
-                    foreach (Button o in spells)
+                    if(turn == 0)
                     {
-                        spriteBatch.Draw(spell, o.Rect, Color.White);
-                        o.Draw(spriteBatch);
+                        foreach (Button o in spells)
+                        {
+                            spriteBatch.Draw(spell, o.Rect, Color.White);
+                            o.Draw(spriteBatch);
+                        }
                     }
+
                     //Draw portraits
                     foreach (Button p in portraits)
                     {

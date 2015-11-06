@@ -22,6 +22,8 @@ namespace Project2
         public bool Aoe { get; set; }
         public string Name { get; set; }
 
+        public string Type {get; set;} //Physical, Magical, Hybrid, Status
+
         public string FlavorText { get; set; }
 
         private List<string> moveData;
@@ -61,6 +63,7 @@ namespace Project2
             Status = moveData[5];
             Aoe = bool.Parse(moveData[6]);
             FlavorText = moveData[7];
+            Type = moveData[8];
         }
     }
 }
