@@ -13,7 +13,11 @@ namespace Project2
         //Move's chance to hit target
         public int Accuracy { get; set; }
 
+        public int StaminaCost { get; set; }
+
         public int StatusChance { get; set; }
+
+        public string Status { get; set; }
 
         public bool Aoe { get; set; }
         public string Name { get; set; }
@@ -52,9 +56,11 @@ namespace Project2
             Name = moveName;
             Attack = int.Parse(moveData[1]);
             Accuracy = int.Parse(moveData[2]);
-            StatusChance = int.Parse(moveData[3]);
-            Aoe = bool.Parse(moveData[4]);
-            FlavorText = moveData[5];
+            StaminaCost = int.Parse(moveData[3]);
+            StatusChance = int.Parse(moveData[4]);
+            Status = moveData[5];
+            Aoe = bool.Parse(moveData[6]);
+            FlavorText = moveData[7];
         }
     }
 }

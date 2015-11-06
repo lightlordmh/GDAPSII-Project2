@@ -1,0 +1,20 @@
+Move list
+=Attributes in order=
+Name
+Attack
+Accuracy
+Stamina cost
+Status chance
+Status
+Aoe (true/false)
+Flavor text
+//Space here to signify new move
+
+testHeal
+-100
+90
+50
+0
+none
+true
+Heals everyone, it's a test!

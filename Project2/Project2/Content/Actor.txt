@@ -1,0 +1,22 @@
+Actors list
+=Attributes in order=
+Name
+Health
+Stamina
+Attack
+Dodge
+Magic
+Experience
+move1
+move2
+move3... etc.
+//Space here to signify new actor
+
+testHealer
+160
+120
+40
+5
+180
+100
+testHeal

@@ -78,6 +78,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Actor.txt" />
+    <Content Include="Content\Move.txt" />
     <Content Include="Content\UI\Base.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
