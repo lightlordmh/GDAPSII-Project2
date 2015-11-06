@@ -186,7 +186,7 @@ namespace Project2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             // TODO: Add your drawing code here
 
@@ -212,10 +212,13 @@ namespace Project2
                 case GameState.Battle:
                     //Draw Base Background
                     Rectangle recB;
-                    spriteBatch.Draw(comb, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    //spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    Rectangle recCB;
+                    spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(234, 19, 454, 334), Color.White);
+                    
                     //Draw Combat Log
                     Rectangle recCL;
-                    spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
+                    //spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
                     //Draw spells
                     foreach (Button o in spells)
                     {
@@ -223,10 +226,10 @@ namespace Project2
                         o.Draw(spriteBatch);
                     }
                     //Draw Actors
-                    spriteBatch.Draw(Healer, new Rectangle(230, 150, 80, 80), Color.White);
-                    spriteBatch.Draw(Tank, new Rectangle(370, 150, 80, 80), Color.White);
-                    spriteBatch.Draw(Mage, new Rectangle(300, 150, 80, 80), Color.White);
-                    spriteBatch.Draw(Dps, new Rectangle(440, 150, 80, 80), Color.White);
+                    spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White);
+                    spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White);
+                    spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White);
+                    spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White);
                     //Draw portraits
                     foreach (Button p in portraits)
                     {
