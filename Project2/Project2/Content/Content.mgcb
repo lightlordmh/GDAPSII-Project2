@@ -294,3 +294,19 @@
 /processorParam:TextureFormat=Color
 /build:BackgroundSprites/DiamondWORLD.png
 
+#begin UI/NewXmlContent.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:UI/NewXmlContent.xml
+
+#begin BackgroundSprites/Campfirebackground.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:BackgroundSprites/Campfirebackground.png
+

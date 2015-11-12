@@ -20,19 +20,19 @@ namespace Project2
         GameState currentstate;
         SpriteFont font;
         //UI Sprites
-        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB;
+        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB, campfiretest;
         //Player Sprites
         Texture2D Healer, Mage, Tank, Dps;
         //Enemy Sprites
         Texture2D PurpleEvilDragon, RobotSnowFrog;
         //Background Sprites
-        Texture2D DiamondWorld;
+        Texture2D DiamondWorld, CampfireBackground;
         //Actors
         Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog, DragonObj, FrogObj, GenericEnemy;
 
         int turn;
 
-        Button startB, exitB, howPlayB, mainMenuB;
+        Button startB, exitB, howPlayB, mainMenuB, campfiretestb;
         List<Button> spells;
         List<Button> portraits;
         List<Button> charSelect;
@@ -151,6 +151,7 @@ namespace Project2
             exit = Content.Load<Texture2D>(@"UI\Exit");
             howPlay = Content.Load<Texture2D>(@"UI\HowToPlay");
             rMain = Content.Load<Texture2D>(@"UI\ReturnMainMenu");
+            campfiretest = Content.Load<Texture2D>(@"UI\Campfiretestbutton");
 
             //Game Assets
             spell = Content.Load<Texture2D>(@"UI\SpellBox");
@@ -171,7 +172,7 @@ namespace Project2
 
             //Background
             DiamondWorld = Content.Load<Texture2D>(@"BackgroundSprites\DiamondWORLD"); //slight filename change
-
+            CampfireBackground = Content.Load<Texture2D>(@"BackgroundSprites\Campfirebackground");
             IsMouseVisible = true;
 
             Buttons();
@@ -206,8 +207,7 @@ namespace Project2
                     MainButtonClick(mouse);
                     break;
                 case GameState.HowtoPlay:
-                    if (mainMenuB.Click == true) { currentstate = GameState.Menu; }
-                    mainMenuB.ClickUpdate(mouse);
+                    MainButtonClick(mouse);
                     break;
                 case GameState.Battle:
                     SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
@@ -274,6 +274,14 @@ namespace Project2
                         }
                     }
                     break;
+
+                case GameState.Campfire:
+
+
+
+
+                    break;
+
             }
 
             base.Update(gameTime);
@@ -303,6 +311,11 @@ namespace Project2
                     spriteBatch.Draw(exit, exitB.Rect, Color.White);
                     //How to play
                     spriteBatch.Draw(howPlay, howPlayB.Rect, Color.White);
+
+                    spriteBatch.Draw(campfiretest, campfiretestb.Rect, Color.White);
+
+
+
                     break;
                 case GameState.HowtoPlay:
                     spriteBatch.Draw(rMain, mainMenuB.Rect, Color.White);
@@ -311,13 +324,13 @@ namespace Project2
                 case GameState.Battle:
                     //Draw Base Background
                     Rectangle recB;
-                    //spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
                     Rectangle recCB;
                     spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(234, 19, 454, 334), Color.White);
 
                     //Draw Combat Log
                     Rectangle recCL;
-                    //spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
+                    spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
                     //Draw spells
                     foreach (Button o in spells)
                     {
@@ -368,6 +381,66 @@ namespace Project2
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
                     break;
+
+
+                case GameState.Campfire:
+                    //Draw Base Background
+                    Rectangle recBackground;
+                    spriteBatch.Draw(bas, recBackground = new Rectangle(0, 0, 720, 600), Color.White);
+                    Rectangle recCampfire;
+                    spriteBatch.Draw(CampfireBackground, recCampfire = new Rectangle(234, 19, 454, 334), Color.White);
+
+                    //Draw Combat Log
+                    //Rectangle recCL2;
+                    //spriteBatch.Draw(comb, recCL2 = new Rectangle(234, 288, 450, 108), Color.White);
+                    //Draw spells
+                    foreach (Button o in spells)
+                    {
+                        spriteBatch.Draw(spell, o.Rect, Color.White);
+                        o.Draw(spriteBatch);
+                    }
+                    //Draw Actors
+                    if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(350, 190, 80, 80), Color.White); }
+                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(490, 190, 80, 80), Color.White); }
+                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(420, 140, 80, 80), Color.White); }
+                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(420, 230, 80, 80), Color.White); }
+                    //Draw portraits
+                    foreach (Button p in portraits)
+                    {
+                        spriteBatch.Draw(port, p.Rect, Color.White);
+                        p.Draw(spriteBatch);
+                    }
+                    //Draw invisible buttons
+                    foreach (Button c in charSelect)
+                    {
+                        spriteBatch.Draw(invisB, c.Rect, Color.White);
+                        c.Draw(spriteBatch);
+                    }
+
+                    //draw health/mana 100 are place holders
+                    //tank
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 36), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 64), Color.Black);
+                    //mage
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 144), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 172), Color.Black);
+                    //warrior
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 258), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 286), Color.Black);
+                    //healer
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 372), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Stamina, HealerObj.curStamina), new Vector2(100, 400), Color.Black);
+                    //empty?
+                    //spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
+                    //spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
+
+                    spriteBatch.DrawString(font, String.Format(" Buy \nStuff"), new Vector2(245, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format(" Buy \nMore \nStuff"), new Vector2(310, 453), Color.Black);
+
+
+
+                    break;
+
             }
 
             spriteBatch.End();
@@ -420,6 +493,8 @@ namespace Project2
             exitB = new Button(279, 396, 162, 64, exit);
             howPlayB = new Button(279, 306, 162, 64, howPlay);
             mainMenuB = new Button(486, 440, 162, 64, rMain);
+            campfiretestb = new Button(279, 500, 162, 64, campfiretest);
+
         }
 
         protected void MainButtonClick(MouseState mouse)
@@ -430,6 +505,10 @@ namespace Project2
             exitB.ClickUpdate(mouse);
             if (howPlayB.Click == true) { currentstate = GameState.HowtoPlay; }
             howPlayB.ClickUpdate(mouse);
+            if (mainMenuB.Click == true) { currentstate = GameState.Menu; }
+            mainMenuB.ClickUpdate(mouse);
+            if (campfiretestb.Click == true) { currentstate = GameState.Campfire; }
+            campfiretestb.ClickUpdate(mouse);
         }
 
         protected void SpellButtonClick(MouseState mouse)
