@@ -205,6 +205,7 @@ namespace Project2
             {
                 case GameState.Menu:
                     MainButtonClick(mouse);
+
                     break;
                 case GameState.HowtoPlay:
                     MainButtonClick(mouse);
@@ -276,7 +277,31 @@ namespace Project2
                     break;
 
                 case GameState.Campfire:
-
+                    //Checks to see if player leveled up
+                    if(HealerObj.curExperience >= HealerObj.Experience)
+                    {
+                        HealerObj.Level++;
+                        HealerObj.curExperience -= HealerObj.Experience;
+                        HealerObj.Experience = HealerObj.Experience + HealerObj.Experience/10;
+                    }
+                    if (TankObj.curExperience >= TankObj.Experience)
+                    {
+                        TankObj.Level++;
+                        TankObj.curExperience -= TankObj.Experience;
+                        TankObj.Experience = TankObj.Experience + TankObj.Experience / 10;
+                    }
+                    if (MageObj.curExperience >= MageObj.Experience)
+                    {
+                        MageObj.Level++;
+                        MageObj.curExperience -= MageObj.Experience;
+                        MageObj.Experience = MageObj.Experience + MageObj.Experience / 10;
+                    }
+                    if (DpsObj.curExperience >= DpsObj.Experience)
+                    {
+                        DpsObj.Level++;
+                        DpsObj.curExperience -= DpsObj.Experience;
+                        DpsObj.Experience = DpsObj.Experience + DpsObj.Experience / 10;
+                    }
 
 
 

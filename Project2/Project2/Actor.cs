@@ -18,7 +18,12 @@ namespace Project2
         public int Dodge { get; set; }
         public int Magic { get; set; }
         public int Experience { get; set; }
+        public int curExperience { get; set; }
         public bool IsPlayer { get; set; }
+
+        public int[] inventory { get; set; }
+
+        public int Level { get; set; }
 
         //Status Aligments
         public bool Poisoned { get; set; }
@@ -60,6 +65,7 @@ namespace Project2
                 Dodge = int.Parse(dataOrganized[3]);
                 Magic = int.Parse(dataOrganized[4]);
                 Experience = int.Parse(dataOrganized[5]);
+                curExperience = 0;
             }
             catch
             {
