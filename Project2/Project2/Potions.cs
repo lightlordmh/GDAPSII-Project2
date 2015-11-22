@@ -7,11 +7,13 @@ namespace Project2
 {
     class Potions : Items
     {
+        //All colored besides black are randomized, milk and black have set stats
         public bool Aoe { get; set; }
         public int amountHealed { get; set; }
+        public int amountStamina { get; set; }
         public bool Poisons { get; set; }
 
-        List<string> potionList;
+        public List<string> potionList { get; set; }
 
         public void ListIntialization()
         {
@@ -22,13 +24,16 @@ namespace Project2
             potionList.Add("Weak");
             potionList.Add("Strong");
             potionList.Add("Poisons");
+            potionList.Add("Milk");
             potionList.Add("Increbile");
         }
 
-        public Potions()
+        public Potions(int IndexIn)
         {
+            ListIntialization();
+            Index = IndexIn;
             Random rand = new Random();
-            int assignedArchetype = rand.Next(0, potionList.Count);
+            int assignedArchetype = rand.Next(0, potionList.Count-2);
             Poisons = false;
             if (potionList[assignedArchetype] =="Regular")
             {
@@ -74,10 +79,17 @@ namespace Project2
                 potionList.Remove("Poisons");
 
             }
-            if (potionList[assignedArchetype] == "Incredible")
+            if(IndexIn == 6)
+            {
+                Aoe = true;
+                amountStamina = 100;
+                potionList.Remove("Milk");
+            }
+            if (IndexIn ==7)
             {
                 Aoe = true;
                 amountHealed = 120;
+                amountStamina = 120;
                 potionList.Remove("Increbile");
 
             }

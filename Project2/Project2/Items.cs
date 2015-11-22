@@ -11,5 +11,6 @@ namespace Project2
         public string Name { get; set; }
         public string Filename { get; set; }
 
+        public int Index { get; set; }
     }
 }

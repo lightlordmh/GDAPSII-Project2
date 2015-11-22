@@ -21,12 +21,17 @@ namespace Project2
         SpriteFont font;
         //UI Sprites
         Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB, campfiretest;
+        //Potion Sprites
+        Texture2D RedBottle, GreenBottle, BlueBottle, OrangeBottle, YellowBottle, PurpleBottle, MilkBottle, BlackPetalBottle;
         //Player Sprites
         Texture2D Healer, Mage, Tank, Dps;
         //Enemy Sprites
         Texture2D PurpleEvilDragon, RobotSnowFrog;
         //Background Sprites
         Texture2D DiamondWorld, CampfireBackground;
+
+        //Potions
+        Potions RedPotion, GreenPotion, BluePotion, OrangePotion, YellowPotion, PurplePotion, MilkPotion, BlackPetalPotion;
         //Actors
         Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog, DragonObj, FrogObj, GenericEnemy;
 
@@ -83,6 +88,19 @@ namespace Project2
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
             turn = 0;
+
+            
+
+            RedPotion = new Potions(0);
+            GreenPotion = new Potions(1);
+            BluePotion = new Potions(2);
+            OrangePotion = new Potions(3);
+            YellowPotion = new Potions(4);
+            PurplePotion = new Potions(5);
+            MilkPotion = new Potions(6);
+            BlackPetalPotion = new Potions(7);
+
+
             HealerObj = new Actor("Healer");
             TankObj = new Actor("Tank");
             MageObj = new Actor("Mage");
@@ -151,7 +169,7 @@ namespace Project2
             exit = Content.Load<Texture2D>(@"UI\Exit");
             howPlay = Content.Load<Texture2D>(@"UI\HowToPlay");
             rMain = Content.Load<Texture2D>(@"UI\ReturnMainMenu");
-            campfiretest = Content.Load<Texture2D>(@"UI\Campfiretestbutton");
+            //campfiretest = Content.Load<Texture2D>(@"UI\Campfiretestbutton");
 
             //Game Assets
             spell = Content.Load<Texture2D>(@"UI\SpellBox");
@@ -160,6 +178,17 @@ namespace Project2
             bas = Content.Load<Texture2D>(@"UI\Base");
             font = Content.Load<SpriteFont>(@"UI\Font");
             invisB = Content.Load<Texture2D>(@"UI\InvisB");
+
+            //Potion Sprites
+            RedBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            GreenBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            BlueBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            OrangeBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            PurpleBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            YellowBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            MilkBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
+            BlackPetalBottle = Content.Load<Texture2D>(@"IconSprites\BlackPetalBottle");
+
 
             //Players Sprites
             Healer = Content.Load<Texture2D>(@"ActorSprites\Healer");
@@ -217,7 +246,7 @@ namespace Project2
                     Random rand = new Random();
                     if (HealerObj.curHealth < 0)
                     {
-                        currentstate = GameState.Menu;
+                        //currentstate = GameState.Menu;
                     }
                     if (turn == 0)
                     {
@@ -276,32 +305,32 @@ namespace Project2
                     }
                     break;
 
-                case GameState.Campfire:
-                    //Checks to see if player leveled up
-                    if(HealerObj.curExperience >= HealerObj.Experience)
-                    {
-                        HealerObj.Level++;
-                        HealerObj.curExperience -= HealerObj.Experience;
-                        HealerObj.Experience = HealerObj.Experience + HealerObj.Experience/10;
-                    }
-                    if (TankObj.curExperience >= TankObj.Experience)
-                    {
-                        TankObj.Level++;
-                        TankObj.curExperience -= TankObj.Experience;
-                        TankObj.Experience = TankObj.Experience + TankObj.Experience / 10;
-                    }
-                    if (MageObj.curExperience >= MageObj.Experience)
-                    {
-                        MageObj.Level++;
-                        MageObj.curExperience -= MageObj.Experience;
-                        MageObj.Experience = MageObj.Experience + MageObj.Experience / 10;
-                    }
-                    if (DpsObj.curExperience >= DpsObj.Experience)
-                    {
-                        DpsObj.Level++;
-                        DpsObj.curExperience -= DpsObj.Experience;
-                        DpsObj.Experience = DpsObj.Experience + DpsObj.Experience / 10;
-                    }
+                //case GameState.Campfire:
+                //    //Checks to see if player leveled up
+                //    if(HealerObj.curExperience >= HealerObj.Experience)
+                //    {
+                //        HealerObj.Level++;
+                //        HealerObj.curExperience -= HealerObj.Experience;
+                //        HealerObj.Experience = HealerObj.Experience + HealerObj.Experience/10;
+                //    }
+                //    if (TankObj.curExperience >= TankObj.Experience)
+                //    {
+                //        TankObj.Level++;
+                //        TankObj.curExperience -= TankObj.Experience;
+                //        TankObj.Experience = TankObj.Experience + TankObj.Experience / 10;
+                //    }
+                //    if (MageObj.curExperience >= MageObj.Experience)
+                //    {
+                //        MageObj.Level++;
+                //        MageObj.curExperience -= MageObj.Experience;
+                //        MageObj.Experience = MageObj.Experience + MageObj.Experience / 10;
+                //    }
+                //    if (DpsObj.curExperience >= DpsObj.Experience)
+                //    {
+                //        DpsObj.Level++;
+                //        DpsObj.curExperience -= DpsObj.Experience;
+                //        DpsObj.Experience = DpsObj.Experience + DpsObj.Experience / 10;
+                //    }
 
 
 
@@ -337,7 +366,7 @@ namespace Project2
                     //How to play
                     spriteBatch.Draw(howPlay, howPlayB.Rect, Color.White);
 
-                    spriteBatch.Draw(campfiretest, campfiretestb.Rect, Color.White);
+                    //spriteBatch.Draw(campfiretest, campfiretestb.Rect, Color.White);
 
 
 
@@ -405,6 +434,15 @@ namespace Project2
                     //empty?
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
+                    //Button Text
+                    spriteBatch.DrawString(font, String.Format("Spells"), new Vector2(240, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Items"), new Vector2(310, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("Equips"), new Vector2(370, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(450, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(515, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(580, 460), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(645, 460), Color.Black);
+
                     break;
 
 
@@ -545,12 +583,12 @@ namespace Project2
             }
             //Insert spell action/logic in brackets
             if (spells[0].Click == true) { PlayerMove(HealerObj, testHeal, GenericEnemy); turn = 2; spells[0].Click = false; }
-            if (spells[1].Click == true) { HealerObj.curHealth = 0; spells[0].Click = false; }
-            if (spells[2].Click == true) { TankObj.curHealth = 0; spells[0].Click = false; }
-            if (spells[3].Click == true) { turn = 2; spells[0].Click = false; }
-            if (spells[4].Click == true) { turn = 2; spells[0].Click = false; }
-            if (spells[5].Click == true) { turn = 2; spells[0].Click = false; }
-            if (spells[6].Click == true) { turn = 2; spells[0].Click = false; }
+            if (spells[1].Click == true) { turn = 2; spells[1].Click = false; }
+            if (spells[2].Click == true) { turn = 2; spells[2].Click = false; }
+            if (spells[3].Click == true) { turn = 2; spells[3].Click = false; }
+            if (spells[4].Click == true) { turn = 2; spells[4].Click = false; }
+            if (spells[5].Click == true) { turn = 2; spells[5].Click = false; }
+            if (spells[6].Click == true) { turn = 2; spells[6].Click = false; }
 
         }
 
