@@ -1,0 +1,41 @@
+DIMENSIONS
+
+Window: 1024W 768H
+
+BATTLE BACKGROUND: 772W 384H
+COMBAT LOG: 736W 160H
+SPELLS/CHARS: 64W 64H
+INVENTORY: 992W 64H
+CHARB: 91W 118H
+MONSTERS: 102W 120H
+
+BASE POINTS
+
+BATTLE BACKGROUND:
+COMBAT LOG: 272x 400y
+SPELLS: 285x 592y
+CHARS: 32x 32y
+INVENTORY: 16x 688y
+
+SEPARATION from point of origin (top left)
+
+SPELLS: +131x 
+CHARS: +128y
+
+ACTUAL SPACE BLANK
+SPELLS: 67
+CHARS: 64
+
+Number of Images per type
+
+Player Sprite: 1
+Npc Sprites: 3
+Enemy Sprites: 5
+
+Main Background: 1
+Combat Backgrounds: 3
+
+Player and NPC Icons: 4
+Potion Icons: 8 
+weapon Incons: 4
+armor Icons: 4
