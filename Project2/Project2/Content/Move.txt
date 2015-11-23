@@ -18,7 +18,7 @@ testHeal
 none
 true
 Heals everyone, it's a test!
-Magical
+Heal
 Z
 testBash
 50

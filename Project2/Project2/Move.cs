@@ -54,14 +54,14 @@ namespace Project2
                    
                 }
                 Name = moveName;
-                Attack = int.Parse(moveData[1]);
-                Accuracy = int.Parse(moveData[2]);
-                StaminaCost = int.Parse(moveData[3]);
-                StatusChance = int.Parse(moveData[4]);
-                Status = moveData[5];
-                Aoe = bool.Parse(moveData[6]);
-                FlavorText = moveData[7];
-                Type = moveData[8];
+                Attack = int.Parse(moveData[0]);
+                Accuracy = int.Parse(moveData[1]);
+                StaminaCost = int.Parse(moveData[2]);
+                StatusChance = int.Parse(moveData[3]);
+                Status = moveData[4];
+                Aoe = bool.Parse(moveData[5]);
+                FlavorText = moveData[6];
+                Type = moveData[7];
             }
             catch
             {
