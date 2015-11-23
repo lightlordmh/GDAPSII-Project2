@@ -20,6 +20,16 @@ true
 Heals everyone, it's a test!
 Heal
 Z
+testTargetedHeal
+-150
+100
+20
+0
+none
+false
+Targets one person
+Target
+Z
 testBash
 50
 90

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
 using System.Linq;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace Project2
         public int amountHealed { get; set; }
         public int amountStamina { get; set; }
         public bool Poisons { get; set; }
+        public Texture2D picture;
 
         public List<string> potionList { get; set; }
 
@@ -28,8 +30,9 @@ namespace Project2
             potionList.Add("Increbile");
         }
 
-        public Potions(int IndexIn)
+        public Potions(int IndexIn, Texture2D pictureIn)
         {
+            picture = pictureIn;
             ListIntialization();
             Index = IndexIn;
             Random rand = new Random();

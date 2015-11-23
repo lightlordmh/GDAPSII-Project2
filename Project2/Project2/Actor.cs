@@ -21,7 +21,7 @@ namespace Project2
         public int curExperience { get; set; }
         public bool IsPlayer { get; set; }
 
-        public int[] inventory { get; set; }
+        public Potions[] inventory { get; set; }
 
         public int Level { get; set; }
 
@@ -57,6 +57,7 @@ namespace Project2
                     i++;
                 }
                 //Name = dataOrganized[0];
+                inventory = new Potions[4];
                 Health = int.Parse(dataOrganized[0]);
                 curHealth = Health;
                 Stamina = int.Parse(dataOrganized[1]);

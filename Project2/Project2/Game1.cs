@@ -38,6 +38,8 @@ namespace Project2
         int turn;
         public int monstersKilled;
         float currentTime;
+        int PlayerTarget;
+        bool targetting;
 
         Button startB, exitB, howPlayB, mainMenuB, campfiretestb;
         List<Button> spells;
@@ -45,6 +47,7 @@ namespace Project2
         List<Button> charSelect;
 
         Move testHeal;
+        Move testTargetHeal;
         Move testBash;
         Move testCast;
         Move testSlash;
@@ -92,15 +95,17 @@ namespace Project2
             turn = 0;
             monstersKilled = 0;
             currentTime = 0;
+            PlayerTarget = -1;
+            targetting = false;
 
-            RedPotion = new Potions(0);
-            GreenPotion = new Potions(1);
-            BluePotion = new Potions(2);
-            OrangePotion = new Potions(3);
-            YellowPotion = new Potions(4);
-            PurplePotion = new Potions(5);
-            MilkPotion = new Potions(6);
-            BlackPetalPotion = new Potions(7);
+            RedPotion = new Potions(0, RedBottle);
+            GreenPotion = new Potions(1, GreenBottle);
+            BluePotion = new Potions(2, BlueBottle);
+            OrangePotion = new Potions(3, OrangeBottle);
+            YellowPotion = new Potions(4, YellowBottle);
+            PurplePotion = new Potions(5, PurpleBottle);
+            MilkPotion = new Potions(6, MilkBottle);
+            BlackPetalPotion = new Potions(7, BlackPetalBottle);
 
 
             HealerObj = new Actor("Healer");
@@ -121,6 +126,7 @@ namespace Project2
             FrogObj.ActorFile("RobotSnowFrog");
 
             testHeal = new Move("testHeal");
+            testTargetHeal = new Move("testTargetHeal");
             testBash = new Move("testBash");
             testCast = new Move("testCast");
             testSlash = new Move("testSlash");
@@ -267,9 +273,37 @@ namespace Project2
 
                     //Turn 1 is intermission
 
-                    if (turn == 2)
+                    if (turn == 2 && PlayerTarget != -1)
                     {
-                        spells[0].Click = false;
+                        targetting = false;
+                        if(spells[0].Click == true)
+                        {
+                            PlayerMove(HealerObj, testHeal, null);
+                            spells[0].Click = false;
+                        }
+                        else if(spells[1].Click == true && PlayerTarget != 5)
+                        {
+                            switch(PlayerTarget)
+                            {
+                                case 0:
+                                    PlayerMove(HealerObj, testTargetHeal, HealerObj);
+                                    break;
+                                case 1:
+                                    PlayerMove(HealerObj, testTargetHeal, MageObj);
+                                    break;
+                                case 2:
+                                    PlayerMove(HealerObj, testTargetHeal, TankObj);
+                                    break;
+                                case 3:
+                                    PlayerMove(HealerObj, testTargetHeal, DpsObj);
+                                    break;
+                                case 4:
+                                    PlayerMove(HealerObj, testTargetHeal, GenericEnemy);
+                                    break;
+                            }
+                            spells[1].Click = false;
+                        }
+                        PlayerTarget = -1;
                         if (HealerObj.curHealth > HealerObj.Health)
                         {
                             HealerObj.curHealth = HealerObj.Health;
@@ -290,13 +324,25 @@ namespace Project2
                         {
                             PlayerMove(TankObj, testBash, GenericEnemy);
                         }
+                        else
+                        {
+                            TankObj.curHealth = 0;
+                        }
                         if (MageObj.curHealth > 0)
                         {
                             PlayerMove(MageObj, testCast, GenericEnemy);
                         }
+                        else
+                        {
+                            MageObj.curHealth = 0;
+                        }
                         if (DpsObj.curHealth > 0)
                         {
                             PlayerMove(DpsObj, testSlash, GenericEnemy);
+                        }
+                        else
+                        {
+                            DpsObj.curHealth = 0;
                         }
 
                         if (GenericEnemy.curHealth >= 0)
@@ -339,6 +385,153 @@ namespace Project2
                             turn = 1;
                             if (GenericEnemy.curHealth <= 0)
                             {
+                                if (rand.Next(0, 2) > 0)
+                                {
+                                    if(HealerObj.inventory[0] == null)
+                                    {
+                                        int potionRecieved = rand.Next(0, 75);
+                                        if(potionRecieved < 10)
+                                        {
+                                            HealerObj.inventory[0] = RedPotion;
+                                        }
+                                        else if(potionRecieved < 20)
+                                        {
+                                            HealerObj.inventory[0] = GreenPotion;
+                                        }
+                                        else if (potionRecieved < 30)
+                                        {
+                                            HealerObj.inventory[0] = BluePotion;
+                                        }
+                                        else if (potionRecieved < 40)
+                                        {
+                                            HealerObj.inventory[0] = YellowPotion;
+                                        }
+                                        else if (potionRecieved < 50)
+                                        {
+                                            HealerObj.inventory[0] = OrangePotion;
+                                        }
+                                        else if (potionRecieved < 60)
+                                        {
+                                            HealerObj.inventory[0] = PurplePotion;
+                                        }
+                                        else if (potionRecieved < 70)
+                                        {
+                                            HealerObj.inventory[0] = MilkPotion;
+                                        }
+                                        else if (potionRecieved < 75)
+                                        {
+                                            HealerObj.inventory[0] = BlackPetalPotion;
+                                        }
+                                    }
+                                    else if (HealerObj.inventory[1] == null)
+                                    {
+                                        int potionRecieved = rand.Next(0, 75);
+                                        if (potionRecieved < 10)
+                                        {
+                                            HealerObj.inventory[1] = RedPotion;
+                                        }
+                                        else if (potionRecieved < 20)
+                                        {
+                                            HealerObj.inventory[1] = GreenPotion;
+                                        }
+                                        else if (potionRecieved < 30)
+                                        {
+                                            HealerObj.inventory[1] = BluePotion;
+                                        }
+                                        else if (potionRecieved < 40)
+                                        {
+                                            HealerObj.inventory[1] = YellowPotion;
+                                        }
+                                        else if (potionRecieved < 50)
+                                        {
+                                            HealerObj.inventory[1] = OrangePotion;
+                                        }
+                                        else if (potionRecieved < 60)
+                                        {
+                                            HealerObj.inventory[1] = PurplePotion;
+                                        }
+                                        else if (potionRecieved < 70)
+                                        {
+                                            HealerObj.inventory[1] = MilkPotion;
+                                        }
+                                        else if (potionRecieved < 75)
+                                        {
+                                            HealerObj.inventory[1] = BlackPetalPotion;
+                                        }
+                                    }
+                                    else if (HealerObj.inventory[2] == null)
+                                    {
+                                        int potionRecieved = rand.Next(0, 75);
+                                        if (potionRecieved < 10)
+                                        {
+                                            HealerObj.inventory[2] = RedPotion;
+                                        }
+                                        else if (potionRecieved < 20)
+                                        {
+                                            HealerObj.inventory[2] = GreenPotion;
+                                        }
+                                        else if (potionRecieved < 30)
+                                        {
+                                            HealerObj.inventory[2] = BluePotion;
+                                        }
+                                        else if (potionRecieved < 40)
+                                        {
+                                            HealerObj.inventory[2] = YellowPotion;
+                                        }
+                                        else if (potionRecieved < 50)
+                                        {
+                                            HealerObj.inventory[2] = OrangePotion;
+                                        }
+                                        else if (potionRecieved < 60)
+                                        {
+                                            HealerObj.inventory[2] = PurplePotion;
+                                        }
+                                        else if (potionRecieved < 70)
+                                        {
+                                            HealerObj.inventory[2] = MilkPotion;
+                                        }
+                                        else if (potionRecieved < 75)
+                                        {
+                                            HealerObj.inventory[2] = BlackPetalPotion;
+                                        }
+                                    }
+                                    else if (HealerObj.inventory[3] == null)
+                                    {
+                                        int potionRecieved = rand.Next(0, 75);
+                                        if (potionRecieved < 10)
+                                        {
+                                            HealerObj.inventory[3] = RedPotion;
+                                        }
+                                        else if (potionRecieved < 20)
+                                        {
+                                            HealerObj.inventory[3] = GreenPotion;
+                                        }
+                                        else if (potionRecieved < 30)
+                                        {
+                                            HealerObj.inventory[3] = BluePotion;
+                                        }
+                                        else if (potionRecieved < 40)
+                                        {
+                                            HealerObj.inventory[3] = YellowPotion;
+                                        }
+                                        else if (potionRecieved < 50)
+                                        {
+                                            HealerObj.inventory[3] = OrangePotion;
+                                        }
+                                        else if (potionRecieved < 60)
+                                        {
+                                            HealerObj.inventory[3] = PurplePotion;
+                                        }
+                                        else if (potionRecieved < 70)
+                                        {
+                                            HealerObj.inventory[3] = MilkPotion;
+                                        }
+                                        else if (potionRecieved < 75)
+                                        {
+                                            HealerObj.inventory[3] = BlackPetalPotion;
+                                        }
+                                    }
+                                }
                                 GenericEnemy.curHealth = GenericEnemy.Health;
                                 monstersKilled++;
                                 turn = 0;
@@ -436,10 +629,27 @@ namespace Project2
                         o.Draw(spriteBatch);
                     }
                     //Draw Actors
+                    
                     if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White); }
+                    if(PlayerTarget == 0 && HealerObj.curHealth > 0)
+                    {
+                        spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.Cyan);
+                    }
                     if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White); }
+                    if (PlayerTarget == 1 && TankObj.curHealth > 0)
+                    {
+                        spriteBatch.Draw(Tank, new Rectangle(230, 190, 80, 80), Color.Cyan);
+                    }
                     if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White); }
+                    if (PlayerTarget == 2 && MageObj.curHealth > 0)
+                    {
+                        spriteBatch.Draw(Mage, new Rectangle(230, 190, 80, 80), Color.Cyan);
+                    }
                     if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White); }
+                    if (PlayerTarget == 3 && DpsObj.curHealth > 0)
+                    {
+                        spriteBatch.Draw(Dps, new Rectangle(230, 190, 80, 80), Color.Cyan);
+                    }
                     //Draw portraits
                     foreach (Button p in portraits)
                     {
@@ -453,46 +663,81 @@ namespace Project2
                         c.Draw(spriteBatch);
                     }
                     //draw monsters
-                    if (GenericEnemy == FrogObj)
+                    if (PlayerTarget == 4)
                     {
-                        spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 120, 100), Color.White);
+                        if (GenericEnemy == FrogObj)
+                        {
+                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 100, 120), Color.Red);
 
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 100, 120), Color.Red);
+                        }
                     }
                     else
                     {
-                        spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 120, 100), Color.White);
+                        if (GenericEnemy == FrogObj)
+                        {
+                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 100, 120), Color.White);
+
+                        }
+                        else
+                        {
+                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 100, 120), Color.White);
+                        }
                     }
+
                     //draw health/mana 100 are place holders
                     //tank
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 36), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 64), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
                     //mage
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 144), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 172), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 144), Color.Gold);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 172), Color.Goldenrod);
                     //warrior
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 258), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 286), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 258), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 286), Color.BlueViolet);
                     //healer
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 372), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Stamina, HealerObj.curStamina), new Vector2(100, 400), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 372), Color.Red);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 400), Color.OrangeRed);
                     //empty?
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 485), Color.DarkRed);
 
                     //Button Text
 
-                    spriteBatch.DrawString(font, String.Format("AOE~H"), new Vector2(237, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Area"), new Vector2(247, 460), Color.Blue);
                     spriteBatch.DrawString(font, String.Format("+100"), new Vector2(230, 475), Color.Green);
                     spriteBatch.DrawString(font, String.Format("-50"), new Vector2(270, 475), Color.Orange);
                     if (HealerObj.curStamina < 50)
                     {
                         spriteBatch.DrawString(font, String.Format("X" + (HealerObj.curStamina - 50).ToString() + "mpX"), new Vector2(230, 510), Color.DarkRed);
                     }
-                    spriteBatch.DrawString(font, String.Format("Items"), new Vector2(310, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("Equips"), new Vector2(370, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(450, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(515, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(580, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(645, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Single"), new Vector2(310, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("+150"), new Vector2(300, 475), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-20"), new Vector2(340, 475), Color.Orange);
+                    spriteBatch.DrawString(font, String.Format("Slot0"), new Vector2(375, 460), Color.Blue);
+                    if(HealerObj.inventory[0] != null)
+                    {
+                        spriteBatch.Draw(HealerObj.inventory[0].picture, new Rectangle(365,450,55,55), Color.White);
+                    }
+
+                    spriteBatch.DrawString(font, String.Format("Slot1"), new Vector2(440, 460), Color.Blue);
+                    if (HealerObj.inventory[1] != null)
+                    {
+                        spriteBatch.Draw(HealerObj.inventory[1].picture, new Rectangle(430, 450, 55, 55), Color.White);
+                    }
+                    spriteBatch.DrawString(font, String.Format("Slot2"), new Vector2(510, 460), Color.Blue);
+                    if (HealerObj.inventory[2] != null)
+                    {
+                        spriteBatch.Draw(HealerObj.inventory[2].picture, new Rectangle(515, 450, 55, 55), Color.White);
+                    }
+                    spriteBatch.DrawString(font, String.Format("Slot3"), new Vector2(575, 460), Color.Blue);
+                    if (HealerObj.inventory[3] != null)
+                    {
+                        spriteBatch.Draw(HealerObj.inventory[3].picture, new Rectangle(580, 450, 55, 55), Color.White);
+                    }
+                    spriteBatch.DrawString(font, String.Format("Pass"), new Vector2(640, 460), Color.Blue);
                     //MonsterKillCount
                     spriteBatch.DrawString(font, String.Format("Monsters Killed: " + monstersKilled), new Vector2(30, 0), Color.Red);
 
@@ -635,13 +880,13 @@ namespace Project2
                 b.ClickUpdate(mouse);
             }
             //Insert spell action/logic in brackets
-            if (spells[0].Click == true && turn == 1 && HealerObj.curStamina >= 50) { PlayerMove(HealerObj, testHeal, GenericEnemy); turn = 2; }
-            if (spells[1].Click == true && turn == 1) { turn = 2; spells[1].Click = false; }
-            if (spells[2].Click == true && turn == 1) { turn = 2; spells[2].Click = false; }
-            if (spells[3].Click == true && turn == 1) { turn = 2; spells[3].Click = false; }
-            if (spells[4].Click == true && turn == 1) { turn = 2; spells[4].Click = false; }
-            if (spells[5].Click == true && turn == 1) { turn = 2; spells[5].Click = false; }
-            if (spells[6].Click == true && turn == 1) { turn = 2; spells[6].Click = false; }
+            if (spells[0].Click == true && turn == 1 && HealerObj.curStamina >= 50) {turn = 2; PlayerTarget = 5; }
+            if (spells[1].Click == true && turn == 1 && HealerObj.curStamina >= 20) { targetting = true; spells[1].Click = false; }
+            if (spells[2].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[0], PlayerTarget); HealerObj.inventory[0] = null; spells[2].Click = false; }
+            if (spells[3].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[1], PlayerTarget); HealerObj.inventory[1] = null; spells[3].Click = false; }
+            if (spells[4].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[2], PlayerTarget); HealerObj.inventory[2] = null; spells[4].Click = false; }
+            if (spells[5].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[3], PlayerTarget); HealerObj.inventory[3] = null; spells[5].Click = false; }
+            if (spells[6].Click == true && turn == 1 && HealerObj.inventory[0] != null) { turn = 2; PlayerTarget = 5; spells[6].Click = false; }
 
         }
 
@@ -653,11 +898,11 @@ namespace Project2
                 b.ClickUpdate(mouse);
             }
             //insert logic for when character is selected
-            if (charSelect[0].Click == true) { }
-            if (charSelect[1].Click == true) { }
-            if (charSelect[2].Click == true) { }
-            if (charSelect[3].Click == true) { }
-            if (charSelect[4].Click == true) { }
+            if (charSelect[0].Click == true) { if (targetting) { turn = 2; PlayerTarget = 0; charSelect[0].Click = false; } else { PlayerTarget = 0; } }
+            if (charSelect[1].Click == true) { if (targetting) { turn = 2; PlayerTarget = 1; charSelect[1].Click = false; } else { PlayerTarget = 1; } }
+            if (charSelect[2].Click == true) { if (targetting) { turn = 2; PlayerTarget = 2; charSelect[2].Click = false; } else { PlayerTarget = 2; } }
+            if (charSelect[3].Click == true) { if (targetting) { turn = 2; PlayerTarget = 3; charSelect[3].Click = false; } else { PlayerTarget = 3; } }
+            if (charSelect[4].Click == true) { if (targetting) { turn = 2; PlayerTarget = 4; charSelect[4].Click = false; } else { PlayerTarget = 4; } }
         }
 
         private void PlayerMove(Actor User, Move moveName, Actor Enemy)
@@ -683,6 +928,11 @@ namespace Project2
                     {
                         damageDealt = 0;
                     }
+                    Enemy.curHealth -= damageDealt;
+                }
+                else if (moveName.Type == "Target")
+                {
+                    damageDealt = User.Magic * moveName.Attack / 100;
                     Enemy.curHealth -= damageDealt;
                 }
                 else
@@ -778,6 +1028,50 @@ namespace Project2
             if (User.curStamina > User.Stamina)
             {
                 User.curStamina = User.Stamina;
+            }
+        }
+
+        private void UsePotion(Potions potion, int target)
+        {
+            if(potion.Aoe)
+            {
+                HealerObj.curHealth += potion.amountHealed;
+                HealerObj.curStamina += potion.amountStamina;
+
+                TankObj.curHealth += potion.amountHealed;
+                TankObj.curStamina += potion.amountStamina;
+
+                MageObj.curHealth += potion.amountHealed;
+                MageObj.curStamina += potion.amountStamina;
+
+                DpsObj.curHealth += potion.amountHealed;
+                DpsObj.curStamina += potion.amountStamina;
+            }
+            else
+            {
+                switch (target)
+                {
+                    case 0:
+                        HealerObj.curHealth += potion.amountHealed;
+                        HealerObj.curStamina += potion.amountStamina;
+                        break;
+                    case 1:
+                        TankObj.curHealth += potion.amountHealed;
+                        TankObj.curStamina += potion.amountStamina;
+                        break;
+                    case 2:
+                        MageObj.curHealth += potion.amountHealed;
+                        MageObj.curStamina += potion.amountStamina;
+                        break;
+                    case 3:
+                        DpsObj.curHealth += potion.amountHealed;
+                        DpsObj.curStamina += potion.amountStamina;
+                        break;
+                    case 4:
+                        GenericEnemy.curHealth += potion.amountHealed;
+                        GenericEnemy.curStamina += potion.amountStamina;
+                        break;
+                }
             }
         }
     }
