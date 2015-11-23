@@ -36,6 +36,8 @@ namespace Project2
         Actor HealerObj, TankObj, MageObj, DpsObj, Dragon, Frog, DragonObj, FrogObj, GenericEnemy;
 
         int turn;
+        public int monstersKilled;
+        float currentTime;
 
         Button startB, exitB, howPlayB, mainMenuB, campfiretestb;
         List<Button> spells;
@@ -88,8 +90,8 @@ namespace Project2
             //Needs some sort of file reader beforehand to input stats
             //For now they have defaults
             turn = 0;
-
-            
+            monstersKilled = 0;
+            currentTime = 0;
 
             RedPotion = new Potions(0);
             GreenPotion = new Potions(1);
@@ -111,6 +113,7 @@ namespace Project2
             MageObj.ActorFile("Mage");
             DpsObj.ActorFile("Warrior");
 
+            GenericEnemy = new Actor("Generic");
             DragonObj = new Actor("PurpleEvilDragon");
             FrogObj = new Actor("RobotSnowFrog");
 
@@ -146,7 +149,6 @@ namespace Project2
             enemyAttackList.Add(testClaw);
             enemyAttackList.Add(testCannon);
             enemyAttackList.Add(testHop);
-
 
         }
 
@@ -195,7 +197,7 @@ namespace Project2
             Mage = Content.Load<Texture2D>(@"ActorSprites\Mage");
             Tank = Content.Load<Texture2D>(@"ActorSprites\Tank");
             Dps = Content.Load<Texture2D>(@"ActorSprites\Warrior"); //slight filename change
-            //Enemies Sprites
+                                                                    //Enemies Sprites
             PurpleEvilDragon = Content.Load<Texture2D>(@"ActorSprites\PurpleEvilDragon");
             RobotSnowFrog = Content.Load<Texture2D>(@"ActorSprites\RobotSnowFrog");
 
@@ -246,7 +248,8 @@ namespace Project2
                     Random rand = new Random();
                     if (HealerObj.curHealth < 0)
                     {
-                        //currentstate = GameState.Menu;
+                        Initialize();
+                        currentstate = GameState.Menu;
                     }
                     if (turn == 0)
                     {
@@ -262,8 +265,27 @@ namespace Project2
                         }
                     }
 
+                    //Turn 1 is intermission
+
                     if (turn == 2)
                     {
+                        spells[0].Click = false;
+                        if (HealerObj.curHealth > HealerObj.Health)
+                        {
+                            HealerObj.curHealth = HealerObj.Health;
+                        }
+                        if (TankObj.curHealth > TankObj.Health)
+                        {
+                            TankObj.curHealth = TankObj.Health;
+                        }
+                        if (MageObj.curHealth > MageObj.Health)
+                        {
+                            MageObj.curHealth = MageObj.Health;
+                        }
+                        if (DpsObj.curHealth > DpsObj.Health)
+                        {
+                            DpsObj.curHealth = DpsObj.Health;
+                        }
                         if (TankObj.curHealth > 0)
                         {
                             PlayerMove(TankObj, testBash, GenericEnemy);
@@ -276,7 +298,7 @@ namespace Project2
                         {
                             PlayerMove(DpsObj, testSlash, GenericEnemy);
                         }
-                        turn = 1;
+
                         if (GenericEnemy.curHealth >= 0)
                         {
                             if (GenericEnemy == FrogObj)
@@ -302,35 +324,57 @@ namespace Project2
                                 }
                             }
                         }
+                        turn = 3;
                     }
+                    if (turn == 3)
+                    {
+                        currentTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+                        if (currentTime > 1)
+                        {
+                            HealerObj.curStamina += 10;
+                            TankObj.curStamina += 10;
+                            MageObj.curStamina += 10;
+                            DpsObj.curStamina += 10;
+                            currentTime = 0;
+                            turn = 1;
+                            if (GenericEnemy.curHealth <= 0)
+                            {
+                                GenericEnemy.curHealth = GenericEnemy.Health;
+                                monstersKilled++;
+                                turn = 0;
+                            }
+                        }
+                    }
+
                     break;
 
-                //case GameState.Campfire:
-                //    //Checks to see if player leveled up
-                //    if(HealerObj.curExperience >= HealerObj.Experience)
-                //    {
-                //        HealerObj.Level++;
-                //        HealerObj.curExperience -= HealerObj.Experience;
-                //        HealerObj.Experience = HealerObj.Experience + HealerObj.Experience/10;
-                //    }
-                //    if (TankObj.curExperience >= TankObj.Experience)
-                //    {
-                //        TankObj.Level++;
-                //        TankObj.curExperience -= TankObj.Experience;
-                //        TankObj.Experience = TankObj.Experience + TankObj.Experience / 10;
-                //    }
-                //    if (MageObj.curExperience >= MageObj.Experience)
-                //    {
-                //        MageObj.Level++;
-                //        MageObj.curExperience -= MageObj.Experience;
-                //        MageObj.Experience = MageObj.Experience + MageObj.Experience / 10;
-                //    }
-                //    if (DpsObj.curExperience >= DpsObj.Experience)
-                //    {
-                //        DpsObj.Level++;
-                //        DpsObj.curExperience -= DpsObj.Experience;
-                //        DpsObj.Experience = DpsObj.Experience + DpsObj.Experience / 10;
-                //    }
+
+                case GameState.Campfire:
+                    //    //Checks to see if player leveled up
+                    //    if(HealerObj.curExperience >= HealerObj.Experience)
+                    //    {
+                    //        HealerObj.Level++;
+                    //        HealerObj.curExperience -= HealerObj.Experience;
+                    //        HealerObj.Experience = HealerObj.Experience + HealerObj.Experience/10;
+                    //    }
+                    //    if (TankObj.curExperience >= TankObj.Experience)
+                    //    {
+                    //        TankObj.Level++;
+                    //        TankObj.curExperience -= TankObj.Experience;
+                    //        TankObj.Experience = TankObj.Experience + TankObj.Experience / 10;
+                    //    }
+                    //    if (MageObj.curExperience >= MageObj.Experience)
+                    //    {
+                    //        MageObj.Level++;
+                    //        MageObj.curExperience -= MageObj.Experience;
+                    //        MageObj.Experience = MageObj.Experience + MageObj.Experience / 10;
+                    //    }
+                    //    if (DpsObj.curExperience >= DpsObj.Experience)
+                    //    {
+                    //        DpsObj.Level++;
+                    //        DpsObj.curExperience -= DpsObj.Experience;
+                    //        DpsObj.Experience = DpsObj.Experience + DpsObj.Experience / 10;
+                    //    }
 
 
 
@@ -392,10 +436,10 @@ namespace Project2
                         o.Draw(spriteBatch);
                     }
                     //Draw Actors
-                    if (HealerObj.curHealth > 0 ) { spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White); }
+                    if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White); }
                     if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White); }
                     if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White); }
-                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White);}
+                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White); }
                     //Draw portraits
                     foreach (Button p in portraits)
                     {
@@ -432,16 +476,25 @@ namespace Project2
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 372), Color.Black);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Stamina, HealerObj.curStamina), new Vector2(100, 400), Color.Black);
                     //empty?
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", 100, 100), new Vector2(100, 485), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", 100, 100), new Vector2(100, 510), Color.Black);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 485), Color.DarkRed);
+
                     //Button Text
-                    spriteBatch.DrawString(font, String.Format("Spells"), new Vector2(240, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Items"), new Vector2(310, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("Equips"), new Vector2(370, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(450, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(515, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(580, 460), Color.Black);
-                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(645, 460), Color.Black);
+
+                    spriteBatch.DrawString(font, String.Format("AOE~H"), new Vector2(237, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("+100"), new Vector2(230, 475), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-50"), new Vector2(270, 475), Color.Orange);
+                    if (HealerObj.curStamina < 50)
+                    {
+                        spriteBatch.DrawString(font, String.Format("X" + (HealerObj.curStamina - 50).ToString() + "mpX"), new Vector2(230, 510), Color.DarkRed);
+                    }
+                    spriteBatch.DrawString(font, String.Format("Items"), new Vector2(310, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Equips"), new Vector2(370, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(450, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(515, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(580, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("N/a"), new Vector2(645, 460), Color.Blue);
+                    //MonsterKillCount
+                    spriteBatch.DrawString(font, String.Format("Monsters Killed: " + monstersKilled), new Vector2(30, 0), Color.Red);
 
                     break;
 
@@ -562,33 +615,33 @@ namespace Project2
 
         protected void MainButtonClick(MouseState mouse)
         {
-            if (startB.Click == true) { currentstate = GameState.Battle; }
+            if (startB.Click == true) { currentstate = GameState.Battle; startB.Click = false; }
             startB.ClickUpdate(mouse);
             if (exitB.Click == true) { Exit(); }
             exitB.ClickUpdate(mouse);
-            if (howPlayB.Click == true) { currentstate = GameState.HowtoPlay; }
+            if (howPlayB.Click == true) { currentstate = GameState.HowtoPlay; howPlayB.Click = false; }
             howPlayB.ClickUpdate(mouse);
-            if (mainMenuB.Click == true) { currentstate = GameState.Menu; }
+            if (mainMenuB.Click == true) { currentstate = GameState.Menu; mainMenuB.Click = false; }
             mainMenuB.ClickUpdate(mouse);
-            if (campfiretestb.Click == true) { currentstate = GameState.Campfire; }
+            if (campfiretestb.Click == true) { currentstate = GameState.Campfire; campfiretestb.Click = false; }
             campfiretestb.ClickUpdate(mouse);
         }
 
         protected void SpellButtonClick(MouseState mouse)
         {
             //Check if each button and mouse intersect
-            foreach(Button b in spells)
+            foreach (Button b in spells)
             {
                 b.ClickUpdate(mouse);
             }
             //Insert spell action/logic in brackets
-            if (spells[0].Click == true) { PlayerMove(HealerObj, testHeal, GenericEnemy); turn = 2; spells[0].Click = false; }
-            if (spells[1].Click == true) { turn = 2; spells[1].Click = false; }
-            if (spells[2].Click == true) { turn = 2; spells[2].Click = false; }
-            if (spells[3].Click == true) { turn = 2; spells[3].Click = false; }
-            if (spells[4].Click == true) { turn = 2; spells[4].Click = false; }
-            if (spells[5].Click == true) { turn = 2; spells[5].Click = false; }
-            if (spells[6].Click == true) { turn = 2; spells[6].Click = false; }
+            if (spells[0].Click == true && turn == 1 && HealerObj.curStamina >= 50) { PlayerMove(HealerObj, testHeal, GenericEnemy); turn = 2; }
+            if (spells[1].Click == true && turn == 1) { turn = 2; spells[1].Click = false; }
+            if (spells[2].Click == true && turn == 1) { turn = 2; spells[2].Click = false; }
+            if (spells[3].Click == true && turn == 1) { turn = 2; spells[3].Click = false; }
+            if (spells[4].Click == true && turn == 1) { turn = 2; spells[4].Click = false; }
+            if (spells[5].Click == true && turn == 1) { turn = 2; spells[5].Click = false; }
+            if (spells[6].Click == true && turn == 1) { turn = 2; spells[6].Click = false; }
 
         }
 
@@ -605,53 +658,58 @@ namespace Project2
             if (charSelect[2].Click == true) { }
             if (charSelect[3].Click == true) { }
             if (charSelect[4].Click == true) { }
-            }
+        }
 
         private void PlayerMove(Actor User, Move moveName, Actor Enemy)
         {
-            int damageDealt;
-            Random rand = new Random();
-            if (moveName.Type == "Physical")
+            if (User.curStamina >= moveName.StaminaCost)
             {
-                damageDealt = User.Attack / 100 * moveName.Attack;
-                if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
+                User.curStamina -= moveName.StaminaCost;
+                int damageDealt;
+                Random rand = new Random();
+                if (moveName.Type == "Physical")
                 {
-                    damageDealt = 0;
+                    damageDealt = (User.Attack * moveName.Attack) / 100;
+                    if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
+                    {
+                        damageDealt = 0;
+                    }
+                    Enemy.curHealth -= damageDealt;
                 }
-                Enemy.curHealth -= damageDealt;
+                else if (moveName.Type == "Magical")
+                {
+                    damageDealt = User.Magic * moveName.Attack / 100;
+                    if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
+                    {
+                        damageDealt = 0;
+                    }
+                    Enemy.curHealth -= damageDealt;
+                }
+                else
+                {
+                    damageDealt = moveName.Attack;
+                    if (rand.Next(0, 100) < moveName.Accuracy)
+                    {
+                        damageDealt = 0;
+                    }
+                    HealerObj.curHealth -= damageDealt;
+                    if (TankObj.curHealth > 0)
+                    {
+                        TankObj.curHealth -= damageDealt;
+                    }
+                    if (MageObj.curHealth > 0)
+                    {
+                        MageObj.curHealth -= damageDealt;
+                    }
+                    if (DpsObj.curHealth > 0)
+                    {
+                        DpsObj.curHealth -= damageDealt;
+                    }
+                }
             }
-            else if (moveName.Type == "Magical")
+            if (User.curStamina > User.Stamina)
             {
-                damageDealt = User.Magic / 100 * moveName.Attack;
-                if (rand.Next(0, 100) + Enemy.Dodge >= moveName.Accuracy)
-                {
-                    damageDealt = 0;
-                }
-                Enemy.curHealth -= damageDealt;
-            }
-            else
-            {
-                damageDealt = moveName.Attack;
-                if (rand.Next(0, 100) >= moveName.Accuracy)
-                {
-                    damageDealt = 0;
-                }
-                HealerObj.curHealth -= damageDealt;
-                if (TankObj.curHealth > 0)
-                {
-                    TankObj.curHealth -= damageDealt;
-                }
-                if (MageObj.curHealth > 0)
-                {
-                    MageObj.curHealth -= damageDealt;
-                }
-                if (DpsObj.curHealth > 0)
-                {
-                    DpsObj.curHealth -= damageDealt;
-                }
-
-
-
+                User.curStamina = User.Stamina;
             }
         }
 
@@ -659,56 +717,67 @@ namespace Project2
         {
             int damageDealt;
             Random rand = new Random();
-            damageDealt = User.Attack / 100 * moveName.Attack;
-            if (moveName.Aoe)
+            damageDealt = (User.Attack * moveName.Attack) / 100;
+            if (User.curStamina >= moveName.StaminaCost)
             {
-                //Check if it hits
-                if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
+                if (moveName.Aoe)
                 {
-                    HealerObj.curHealth -= damageDealt;
+                    //Check if it hits
+                    if ((rand.Next(0, 100) - HealerObj.Dodge < moveName.Accuracy))
+                    {
+                        HealerObj.curHealth -= damageDealt;
+                    }
+                    if ((rand.Next(0, 100) - TankObj.Dodge < moveName.Accuracy))
+                    {
+                        TankObj.curHealth -= damageDealt;
+                    }
+                    if ((rand.Next(0, 100) - MageObj.Dodge < moveName.Accuracy))
+                    {
+                        MageObj.curHealth -= damageDealt;
+                    }
+                    if ((rand.Next(0, 100) - DpsObj.Dodge < moveName.Accuracy))
+                    {
+                        DpsObj.curHealth -= damageDealt;
+                    }
                 }
-                if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
+                else
                 {
-                    TankObj.curHealth -= damageDealt;
-                }
-                if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
-                {
-                    MageObj.curHealth -= damageDealt;
-                }
-                if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
-                {
-                    DpsObj.curHealth -= damageDealt;
+                    switch (rand.Next(0, 4))
+                    {
+                        case 0:
+                            if ((rand.Next(0, 100) - HealerObj.Dodge < moveName.Accuracy))
+                            {
+                                HealerObj.curHealth -= damageDealt;
+                            }
+                            break;
+                        case 1:
+                            if ((rand.Next(0, 100) - TankObj.Dodge < moveName.Accuracy))
+                            {
+                                TankObj.curHealth -= damageDealt;
+                            }
+                            break;
+                        case 2:
+                            if ((rand.Next(0, 100) - MageObj.Dodge < moveName.Accuracy))
+                            {
+                                MageObj.curHealth -= damageDealt;
+                            }
+                            break;
+                        case 3:
+                            if ((rand.Next(0, 100) - DpsObj.Dodge < moveName.Accuracy))
+                            {
+                                DpsObj.curHealth -= damageDealt;
+                            }
+                            break;
+                    }
                 }
             }
-            else
+            if ((User.curStamina - moveName.StaminaCost) <= 0)
             {
-                switch (rand.Next(0, 4))
-                {
-                    case 0:
-                        if ((rand.Next(0, 100) - HealerObj.Dodge >= moveName.Accuracy))
-                        {
-                            HealerObj.curHealth -= damageDealt;
-                        }
-                        break;
-                    case 1:
-                        if ((rand.Next(0, 100) - TankObj.Dodge >= moveName.Accuracy))
-                        {
-                            TankObj.curHealth -= damageDealt;
-                        }
-                        break;
-                    case 2:
-                        if ((rand.Next(0, 100) - MageObj.Dodge >= moveName.Accuracy))
-                        {
-                            MageObj.curHealth -= damageDealt;
-                        }
-                        break;
-                    case 3:
-                        if ((rand.Next(0, 100) - DpsObj.Dodge >= moveName.Accuracy))
-                        {
-                            DpsObj.curHealth -= damageDealt;
-                        }
-                        break;
-                }
+                User.curStamina = 0;
+            }
+            if (User.curStamina > User.Stamina)
+            {
+                User.curStamina = User.Stamina;
             }
         }
     }
