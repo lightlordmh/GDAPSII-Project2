@@ -12,13 +12,16 @@ namespace Project2ThemeEditor
 {
     public partial class Sprites : Form
     {
+        public bool Ready { get; set; }
         public Sprites()
         {
             InitializeComponent();
+            Ready = false;
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
+            ImageCheck();
             this.Hide();
         }
 
@@ -91,6 +94,15 @@ namespace Project2ThemeEditor
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 playerPic.ImageLocation = openFileDialog1.FileName;
+            }
+        }
+        public void ImageCheck()
+        {
+            if (npcPic1.ImageLocation != null && npcPic2.ImageLocation != null && npcPic3.ImageLocation != null &&
+                monsterPic1.ImageLocation != null && monsterPic2.ImageLocation != null && monsterPic3.ImageLocation != null &&
+                monsterPic4.ImageLocation != null && monsterPic5.ImageLocation != null && playerPic.ImageLocation != null)
+            {
+                Ready = true;
             }
         }
     }

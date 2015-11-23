@@ -12,13 +12,16 @@ namespace Project2ThemeEditor
 {
     public partial class MainBackground : Form
     {
+        public bool Ready { get; set; }
         public MainBackground()
         {
             InitializeComponent();
+            Ready = false;
         }
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
+            ImageCheck();
             this.Hide();
         }
 
@@ -28,6 +31,13 @@ namespace Project2ThemeEditor
             {
                 mainBackgroundPic.ImageLocation = openFileDialog1.FileName;
             }
+        }
+        public void ImageCheck()
+        {
+            if (mainBackgroundPic.ImageLocation != null)
+            {
+                Ready = true;
+            } 
         }
     }
 }

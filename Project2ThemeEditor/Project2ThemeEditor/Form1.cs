@@ -32,7 +32,9 @@ namespace Project2ThemeEditor
         {
             if (mainBackground.Visible == true)
             {
+                mainBackground.ImageCheck();
                 mainBackground.Hide();
+
             }
             else
             {
@@ -44,6 +46,7 @@ namespace Project2ThemeEditor
         {
             if (combatBackground.Visible == true)
             {
+                combatBackground.ImageCheck();
                 combatBackground.Hide();
             }
             else
@@ -56,6 +59,7 @@ namespace Project2ThemeEditor
         {
             if (sprites.Visible == true)
             {
+                sprites.ImageCheck();
                 sprites.Hide();
             }
             else
