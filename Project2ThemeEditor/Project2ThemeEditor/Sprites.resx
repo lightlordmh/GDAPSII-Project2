@@ -117,24 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="openFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="saveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>132, 17</value>
-  </metadata>
-  <metadata name="folderBrowserDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>268, 17</value>
-  </metadata>
-  <data name="label1.Text" xml:space="preserve">
-    <value>Instructions on use:
-1. Click File -&gt; Open Folder
-2. Select your Theme folder 
-      (this folder is your theme it should be in the same folder as the game exe )
-3.The buttons for the editors are now available 
-4. Click and editor and follow its instructions
-5. Repeate step 4 until all editors have been completed
-6. Click File -&gt; Save All
-7. Congraduations yours theme is now complete</value>
+  <data name="Description.Text" xml:space="preserve">
+    <value>Instructions for use:
+1. Click on a picture box
+2.Pick an image 
+3.Repeat until all picture boxes are filled 
+4. Click the Close button
+(closing the window)
+
+Resolution and Format:
+Player and NPC resolution: 91x118
+Monster resolutions: 102x120
+PNG</value>
   </data>
 </root>

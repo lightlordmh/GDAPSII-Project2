@@ -25,3 +25,17 @@ CHARS: +128y
 ACTUAL SPACE BLANK
 SPELLS: 67
 CHARS: 64
+
+Number of Images per type
+
+Player Sprite: 1
+Npc Sprites: 3
+Enemy Sprites: 5
+
+Main Background: 1
+Combat Backgrounds: 3
+
+Player and NPC Icons: 4
+Potion Icons: 8 
+weapon Incons: 4
+armor Icons: 4

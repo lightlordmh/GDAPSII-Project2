@@ -46,16 +46,49 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CombatBackground.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CombatBackground.Designer.cs">
+      <DependentUpon>CombatBackground.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainBackground.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainBackground.Designer.cs">
+      <DependentUpon>MainBackground.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Sprites.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Sprites.Designer.cs">
+      <DependentUpon>Sprites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Icon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Icon.Designer.cs">
+      <DependentUpon>Icon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CombatBackground.resx">
+      <DependentUpon>CombatBackground.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Icon.resx">
+      <DependentUpon>Icon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainBackground.resx">
+      <DependentUpon>MainBackground.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +99,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Sprites.resx">
+      <DependentUpon>Sprites.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
