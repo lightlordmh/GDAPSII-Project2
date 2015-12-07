@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Akinnora/Desktop/GDAPSII-Project2/Project2/Project2/Content/IconSprites/MilkBottle.png</SourceFile>
+  <SourceFile>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/IconSprites/MilkBottle.png</SourceFile>
   <SourceTime>2015-12-07T15:33:25.7715661-05:00</SourceTime>
-  <DestFile>C:/Users/Akinnora/Desktop/GDAPSII-Project2/Project2/Project2/Content/bin/Windows/IconSprites/MilkBottle.xnb</DestFile>
-  <DestTime>2015-12-07T15:34:01.2035927-05:00</DestTime>
+  <DestFile>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/bin/Windows/IconSprites/MilkBottle.xnb</DestFile>
+  <DestTime>2015-12-07T16:06:35.673382-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

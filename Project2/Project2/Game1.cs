@@ -640,17 +640,17 @@ namespace Project2
                     {
                         spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(404, 202, 91, 118), Color.White); }
+                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(604, 202, 91, 118), Color.White); }
                     if (PlayerTarget == 1 && TankObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Tank, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(504, 202, 91, 118), Color.White); }
+                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(404, 202, 91, 118), Color.White); }
                     if (PlayerTarget == 2 && MageObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Mage, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(604, 202, 100, 118), Color.White); }
+                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(504, 202, 100, 118), Color.White); }
                     if (PlayerTarget == 3 && DpsObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Dps, new Rectangle(230, 190, 80, 80), Color.Cyan);
@@ -698,14 +698,14 @@ namespace Project2
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
                     //mage
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 170), Color.Gold);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 200), Color.Goldenrod);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 430), Color.Gold);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 460), Color.Goldenrod);
                     //warrior
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 300), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 334), Color.BlueViolet);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 170), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 200), Color.BlueViolet);
                     //healer
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 430), Color.Red);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 460), Color.OrangeRed);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 300), Color.Red);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 334), Color.OrangeRed);
                     //empty?
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 560), Color.DarkRed);
 

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Akinnora/Desktop/GDAPSII-Project2/Project2/Project2/Content/UI/InvisB.png</SourceFile>
+  <SourceFile>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/UI/InvisB.png</SourceFile>
   <SourceTime>2015-12-07T15:33:26.0845841-05:00</SourceTime>
-  <DestFile>C:/Users/Akinnora/Desktop/GDAPSII-Project2/Project2/Project2/Content/bin/Windows/UI/InvisB.xnb</DestFile>
-  <DestTime>2015-12-07T15:34:01.1965923-05:00</DestTime>
+  <DestFile>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/bin/Windows/UI/InvisB.xnb</DestFile>
+  <DestTime>2015-12-07T16:06:35.6703818-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2015-04-29T13:14:44-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
