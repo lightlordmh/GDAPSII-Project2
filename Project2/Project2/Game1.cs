@@ -20,7 +20,7 @@ namespace Project2
         GameState currentstate;
         SpriteFont font;
         //UI Sprites
-        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB, campfiretest;
+        Texture2D main, start, exit, howPlay, rMain, spell, port, comb, bas, invisB, campfiretest, inv;
         //Potion Sprites
         Texture2D RedBottle, GreenBottle, BlueBottle, OrangeBottle, YellowBottle, PurpleBottle, MilkBottle, BlackPetalBottle;
         //Player Sprites
@@ -186,6 +186,7 @@ namespace Project2
             bas = Content.Load<Texture2D>(@"UI\Base");
             font = Content.Load<SpriteFont>(@"UI\Font");
             invisB = Content.Load<Texture2D>(@"UI\InvisB");
+            inv = Content.Load<Texture2D>(@"UI\Inventory");
 
             //Potion Sprites
             RedBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
@@ -595,7 +596,7 @@ namespace Project2
                 case GameState.Menu:
                     //background
                     Rectangle recM;
-                    spriteBatch.Draw(main, recM = new Rectangle(0, 0, 720, 600), Color.White);
+                    spriteBatch.Draw(main, recM = new Rectangle(0, 0, Stat.CONSOLEW, Stat.CONSOLEH), Color.White);
                     //Start
                     spriteBatch.Draw(start, startB.Rect, Color.White);
                     //Exit
@@ -615,13 +616,17 @@ namespace Project2
                 case GameState.Battle:
                     //Draw Base Background
                     Rectangle recB;
-                    spriteBatch.Draw(bas, recB = new Rectangle(0, 0, 720, 600), Color.White);
+                    spriteBatch.Draw(bas, recB = new Rectangle(0, 0, Stat.CONSOLEW, Stat.CONSOLEH), Color.White);
                     Rectangle recCB;
-                    spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(234, 19, 454, 334), Color.White);
+                    spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(256, 0, Stat.BBACKW, Stat.BBACKH), Color.White);
 
                     //Draw Combat Log
                     Rectangle recCL;
-                    spriteBatch.Draw(comb, recCL = new Rectangle(234, 288, 450, 108), Color.White);
+                    spriteBatch.Draw(comb, recCL = new Rectangle(272, 400, Stat.COMBW, Stat.COMBH), Color.White);
+
+                    //Draw Inventory
+                    Rectangle recINV;
+                    spriteBatch.Draw(inv, recINV = new Rectangle(16, 688, 992, 64), Color.White);
                     //Draw spells
                     foreach (Button o in spells)
                     {
@@ -630,22 +635,22 @@ namespace Project2
                     }
                     //Draw Actors
                     
-                    if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.White); }
+                    if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(304, 202, 91, 118), Color.White); }
                     if(PlayerTarget == 0 && HealerObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(370, 190, 80, 80), Color.White); }
+                    if (TankObj.curHealth > 0) { spriteBatch.Draw(Tank, new Rectangle(404, 202, 91, 118), Color.White); }
                     if (PlayerTarget == 1 && TankObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Tank, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(300, 190, 80, 80), Color.White); }
+                    if (MageObj.curHealth > 0) { spriteBatch.Draw(Mage, new Rectangle(504, 202, 91, 118), Color.White); }
                     if (PlayerTarget == 2 && MageObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Mage, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
-                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(440, 190, 80, 80), Color.White); }
+                    if (DpsObj.curHealth > 0) { spriteBatch.Draw(Dps, new Rectangle(604, 202, 100, 118), Color.White); }
                     if (PlayerTarget == 3 && DpsObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Dps, new Rectangle(230, 190, 80, 80), Color.Cyan);
@@ -667,24 +672,24 @@ namespace Project2
                     {
                         if (GenericEnemy == FrogObj)
                         {
-                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 100, 120), Color.Red);
+                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(873, 215, 120, 100), Color.White);
 
                         }
                         else
                         {
-                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 100, 120), Color.Red);
+                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(873, 215, 120, 100), Color.White);
                         }
                     }
                     else
                     {
                         if (GenericEnemy == FrogObj)
                         {
-                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(550, 150, 100, 120), Color.White);
+                            spriteBatch.Draw(RobotSnowFrog, new Rectangle(873, 215, 120, 100), Color.White);
 
                         }
                         else
                         {
-                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(550, 150, 100, 120), Color.White);
+                            spriteBatch.Draw(PurpleEvilDragon, new Rectangle(873, 215, 120, 100), Color.White);
                         }
                     }
 
@@ -693,51 +698,52 @@ namespace Project2
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
                     spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
                     //mage
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 144), Color.Gold);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 172), Color.Goldenrod);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 170), Color.Gold);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 200), Color.Goldenrod);
                     //warrior
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 258), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 286), Color.BlueViolet);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 300), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 334), Color.BlueViolet);
                     //healer
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 372), Color.Red);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 400), Color.OrangeRed);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 430), Color.Red);
+                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 460), Color.OrangeRed);
                     //empty?
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 485), Color.DarkRed);
+                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 560), Color.DarkRed);
 
                     //Button Text
 
-                    spriteBatch.DrawString(font, String.Format("Area"), new Vector2(247, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("+100"), new Vector2(230, 475), Color.Green);
-                    spriteBatch.DrawString(font, String.Format("-50"), new Vector2(270, 475), Color.Orange);
+                    spriteBatch.DrawString(font, String.Format("Area"), new Vector2(290, 600), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("+100"), new Vector2(286, 620), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-50"), new Vector2(324, 620), Color.Orange);
                     if (HealerObj.curStamina < 50)
                     {
-                        spriteBatch.DrawString(font, String.Format("X" + (HealerObj.curStamina - 50).ToString() + "mpX"), new Vector2(230, 510), Color.DarkRed);
+                        spriteBatch.DrawString(font, String.Format("X" + (HealerObj.curStamina - 50).ToString() + "mpX"), new Vector2(286, 640), Color.DarkRed);
                     }
-                    spriteBatch.DrawString(font, String.Format("Single"), new Vector2(310, 460), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("+150"), new Vector2(300, 475), Color.Green);
-                    spriteBatch.DrawString(font, String.Format("-20"), new Vector2(340, 475), Color.Orange);
-                    spriteBatch.DrawString(font, String.Format("Slot0"), new Vector2(375, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Single"), new Vector2(426, 600), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("+150"), new Vector2(424, 620), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-20"), new Vector2(456, 620), Color.Orange);
+
+                    spriteBatch.DrawString(font, String.Format("Slot0"), new Vector2(556, 600), Color.Blue);
                     if(HealerObj.inventory[0] != null)
                     {
-                        spriteBatch.Draw(HealerObj.inventory[0].picture, new Rectangle(365,450,55,55), Color.White);
+                        spriteBatch.Draw(HealerObj.inventory[0].picture, new Rectangle(544, 592, 64, 64), Color.White);
                     }
 
-                    spriteBatch.DrawString(font, String.Format("Slot1"), new Vector2(440, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Slot1"), new Vector2(700, 600), Color.Blue);
                     if (HealerObj.inventory[1] != null)
                     {
-                        spriteBatch.Draw(HealerObj.inventory[1].picture, new Rectangle(430, 450, 55, 55), Color.White);
+                        spriteBatch.Draw(HealerObj.inventory[1].picture, new Rectangle(672, 592, 64, 64), Color.White);
                     }
-                    spriteBatch.DrawString(font, String.Format("Slot2"), new Vector2(510, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Slot2"), new Vector2(830, 600), Color.Blue);
                     if (HealerObj.inventory[2] != null)
                     {
-                        spriteBatch.Draw(HealerObj.inventory[2].picture, new Rectangle(515, 450, 55, 55), Color.White);
+                        spriteBatch.Draw(HealerObj.inventory[2].picture, new Rectangle(800, 592, 64, 64), Color.White);
                     }
-                    spriteBatch.DrawString(font, String.Format("Slot3"), new Vector2(575, 460), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("Slot3"), new Vector2(960, 600), Color.Blue);
                     if (HealerObj.inventory[3] != null)
                     {
-                        spriteBatch.Draw(HealerObj.inventory[3].picture, new Rectangle(580, 450, 55, 55), Color.White);
+                        spriteBatch.Draw(HealerObj.inventory[3].picture, new Rectangle(928, 592, 64, 64), Color.White);
                     }
-                    spriteBatch.DrawString(font, String.Format("Pass"), new Vector2(640, 460), Color.Blue);
+                    //spriteBatch.DrawString(font, String.Format("Pass"), new Vector2(640, 600), Color.Blue);
                     //MonsterKillCount
                     spriteBatch.DrawString(font, String.Format("Monsters Killed: " + monstersKilled), new Vector2(30, 0), Color.Red);
 
@@ -814,27 +820,28 @@ namespace Project2
             //Game spells
             spells = new List<Button>();
             int spellNum = 7;
-            int spellX = 237;
-            int spellY = 453;
+            int spellX = 285;
+            int spellY = 592;
             int i = 0;
             while (i < spellNum)
             {
                 spells.Add(new Button(spellX, spellY, Stat.SPELLW, Stat.SPELLH, spell));
-                spellX = spellX + 65;
+                spellX = spellX + 131;
                 i++;
             }
             //Game portraits
             portraits = new List<Button>();
             int portNum = 5;
-            int portX = 30;
-            int portY = 31;
+            int portX = 32;
+            int portY = 32;
             int e = 0;
             while (e < portNum)
             {
                 portraits.Add(new Button(portX, portY, Stat.PORTW, Stat.PORTH, port));
-                portY = portY + 113;
+                portY = portY + 128;
                 e++;
             }
+
             //Invisible Character select buttons(for casting spells)
             charSelect = new List<Button>();
             int charNum = 5;
@@ -850,9 +857,9 @@ namespace Project2
 
 
             //Main Menu/How to Play Buttons
-            startB = new Button(279, 216, 162, 64, start);
-            exitB = new Button(279, 396, 162, 64, exit);
-            howPlayB = new Button(279, 306, 162, 64, howPlay);
+            startB = new Button(424, 250, 162, 64, start);
+            exitB = new Button(424, 430, 162, 64, exit);
+            howPlayB = new Button(424, 320, 162, 64, howPlay);
             mainMenuB = new Button(486, 440, 162, 64, rMain);
             campfiretestb = new Button(279, 500, 162, 64, campfiretest);
 
