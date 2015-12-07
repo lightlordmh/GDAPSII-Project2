@@ -276,3 +276,11 @@ C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Window
 C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\SharpDX.RawInput.xml
 C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\SharpDX.Direct3D9.xml
 C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\obj\x86\Debug\Project2.csprojResolveAssemblyReference.cache
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\HealerIcon.png
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\MageIcon.png
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\TankIcon.png
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\WarriorIcon.png
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\HealerIcon.xnb
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\MageIcon.xnb
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\TankIcon.xnb
+C:\Users\Akinnora\Documents\GitHub\GDAPSII-Project2\Project2\Project2\bin\Windows\Debug\Content\Icons\WarriorIcon.xnb

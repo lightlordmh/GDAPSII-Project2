@@ -32,5 +32,9 @@
     <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/BackgroundSprites/DiamondWORLD.png</File>
     <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/UI/NewXmlContent.xml</File>
     <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/BackgroundSprites/Campfirebackground.png</File>
+    <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/Icons/HealerIcon.png</File>
+    <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/Icons/MageIcon.png</File>
+    <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/Icons/TankIcon.png</File>
+    <File>C:/Users/Akinnora/Documents/GitHub/GDAPSII-Project2/Project2/Project2/Content/Icons/WarriorIcon.png</File>
   </SourceFiles>
 </SourceFileCollection>

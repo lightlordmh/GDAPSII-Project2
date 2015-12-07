@@ -25,6 +25,8 @@ namespace Project2
         Texture2D RedBottle, GreenBottle, BlueBottle, OrangeBottle, YellowBottle, PurpleBottle, MilkBottle, BlackPetalBottle;
         //Player Sprites
         Texture2D Healer, Mage, Tank, Dps;
+        //Player Icons
+        Texture2D IHealer, IMage, ITank, IDps;
         //Enemy Sprites
         Texture2D PurpleEvilDragon, RobotSnowFrog;
         //Background Sprites
@@ -44,6 +46,7 @@ namespace Project2
         Button startB, exitB, howPlayB, mainMenuB, campfiretestb;
         List<Button> spells;
         List<Button> portraits;
+        List<Texture2D> portIcon;
         List<Button> charSelect;
 
         Move testHeal;
@@ -156,6 +159,8 @@ namespace Project2
             enemyAttackList.Add(testCannon);
             enemyAttackList.Add(testHop);
 
+
+
         }
 
         /// <summary>
@@ -197,6 +202,12 @@ namespace Project2
             YellowBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
             MilkBottle = Content.Load<Texture2D>(@"IconSprites\RedBottle");
             BlackPetalBottle = Content.Load<Texture2D>(@"IconSprites\BlackPetalBottle");
+
+            //Player Icons
+            IHealer = Content.Load<Texture2D>(@"Icons\HealerIcon");
+            IMage = Content.Load<Texture2D>(@"Icons\MageIcon");
+            ITank = Content.Load<Texture2D>(@"Icons\TankIcon");
+            IDps = Content.Load<Texture2D>(@"Icons\WarriorIcon");
 
 
             //Players Sprites
@@ -673,7 +684,6 @@ namespace Project2
                         if (GenericEnemy == FrogObj)
                         {
                             spriteBatch.Draw(RobotSnowFrog, new Rectangle(873, 215, 120, 100), Color.White);
-
                         }
                         else
                         {
@@ -831,13 +841,18 @@ namespace Project2
             }
             //Game portraits
             portraits = new List<Button>();
-            int portNum = 5;
+            portIcon = new List<Texture2D>();
+            portIcon.Add(IHealer);
+            portIcon.Add(IMage);
+            portIcon.Add(IDps);
+            portIcon.Add(ITank);
+            int portNum = 4;
             int portX = 32;
             int portY = 32;
             int e = 0;
             while (e < portNum)
             {
-                portraits.Add(new Button(portX, portY, Stat.PORTW, Stat.PORTH, port));
+                portraits.Add(new Button(portX, portY, Stat.PORTW, Stat.PORTH, portIcon[e]));
                 portY = portY + 128;
                 e++;
             }
