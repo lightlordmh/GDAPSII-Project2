@@ -254,11 +254,12 @@ namespace Project2
             {
                 case GameState.Menu:
                     MainButtonClick(mouse);
-
                     break;
+
                 case GameState.HowtoPlay:
                     MainButtonClick(mouse);
                     break;
+
                 case GameState.Battle:
                     SpellButtonClick(mouse);  //Note logic mentioned below can be put into the SpellButtonClick Method further down this class
                     CharacterClick(mouse);
@@ -705,32 +706,32 @@ namespace Project2
 
                     //draw health/mana 100 are place holders
                     //tank
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
+                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
+                    spriteBatch.DrawString(font, String.Format("MP {1}/{0} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
                     //mage
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 430), Color.Gold);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 460), Color.Goldenrod);
+                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 430), Color.Gold);
+                    spriteBatch.DrawString(font, String.Format("MP {1}/{0} ", TankObj.Stamina, TankObj.curStamina), new Vector2(100, 460), Color.Goldenrod);
                     //warrior
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 170), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 200), Color.BlueViolet);
+                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", MageObj.Health, MageObj.curHealth), new Vector2(100, 170), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("MP {1}/{0} ", MageObj.Stamina, MageObj.curStamina), new Vector2(100, 200), Color.BlueViolet);
                     //healer
-                    spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 300), Color.Red);
-                    spriteBatch.DrawString(font, String.Format("MP {0}/{1} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 334), Color.OrangeRed);
+                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", DpsObj.Health, DpsObj.curHealth), new Vector2(100, 300), Color.Red);
+                    spriteBatch.DrawString(font, String.Format("MP {1}/{0} ", DpsObj.Stamina, DpsObj.curStamina), new Vector2(100, 334), Color.OrangeRed);
                     //empty?
                     spriteBatch.DrawString(font, String.Format("HP {0}/{1} ", GenericEnemy.curHealth, GenericEnemy.Health), new Vector2(100, 560), Color.DarkRed);
 
                     //Button Text
 
-                    spriteBatch.DrawString(font, String.Format("Area"), new Vector2(290, 600), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("+100"), new Vector2(286, 620), Color.Green);
-                    spriteBatch.DrawString(font, String.Format("-50"), new Vector2(324, 620), Color.Orange);
+                    spriteBatch.DrawString(font, String.Format("Blanket\n   Heal"), new Vector2(290, 593), Color.Blue);
+                    spriteBatch.DrawString(font, String.Format("+60 Hp"), new Vector2(290, 624), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-20 Mp"), new Vector2(293, 639), Color.Orange);
                     if (HealerObj.curStamina < 50)
                     {
                         spriteBatch.DrawString(font, String.Format("X" + (HealerObj.curStamina - 50).ToString() + "mpX"), new Vector2(286, 640), Color.DarkRed);
                     }
                     spriteBatch.DrawString(font, String.Format("Single"), new Vector2(426, 600), Color.Blue);
-                    spriteBatch.DrawString(font, String.Format("+150"), new Vector2(424, 620), Color.Green);
-                    spriteBatch.DrawString(font, String.Format("-20"), new Vector2(456, 620), Color.Orange);
+                    spriteBatch.DrawString(font, String.Format("+100 Hp"), new Vector2(418, 620), Color.Green);
+                    spriteBatch.DrawString(font, String.Format("-30 Mp"), new Vector2(425, 635), Color.Orange);
 
                     spriteBatch.DrawString(font, String.Format("Slot0"), new Vector2(556, 600), Color.Blue);
                     if(HealerObj.inventory[0] != null)
