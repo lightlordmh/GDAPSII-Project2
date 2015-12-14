@@ -354,3 +354,85 @@
 /processorParam:TextureFormat=Color
 /build:Icons/WarriorIcon.png
 
+#begin Icons/Music/EnemyExplosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Icons/Music/EnemyExplosion.wav
+
+#begin Icons/Music/PlayerDamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Icons/Music/PlayerDamage.wav
+
+#begin Icons/Music/songAlien.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Icons/Music/songAlien.wav
+
+#begin Icons/Music/songHappy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Icons/Music/songHappy.wav
+
+#begin Icons/Music/songPoison.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Icons/Music/songPoison.wav
+
+#begin Music/EnemyExplosion.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/EnemyExplosion.wav
+
+#begin Music/PlayerDamage.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/PlayerDamage.wav
+
+#begin Music/songAlien.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/songAlien.wav
+
+#begin Music/songHappy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/songHappy.wav
+
+#begin Music/songPoison.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Music/songPoison.wav
+
+#begin BackgroundSprites/BackGround.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:BackgroundSprites/BackGround.png
+
+#begin BackgroundSprites/TownWORLD.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:TextureFormat=Color
+/build:BackgroundSprites/TownWORLD.png
+

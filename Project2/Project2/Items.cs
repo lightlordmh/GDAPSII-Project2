@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Project2
 {
-    class Items
+    public class Items
     {
         public int Price { get; set; }
         public string Name { get; set; }

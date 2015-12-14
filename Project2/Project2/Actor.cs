@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Project2
 {
-    class Actor
+    public class Actor
     {
         //Shared Stats
         public string Name { get; set; }
@@ -57,7 +57,7 @@ namespace Project2
                     i++;
                 }
                 //Name = dataOrganized[0];
-                inventory = new Potions[4];
+                inventory = new Potions[3];
                 Health = int.Parse(dataOrganized[0]);
                 curHealth = Health;
                 Stamina = int.Parse(dataOrganized[1]);

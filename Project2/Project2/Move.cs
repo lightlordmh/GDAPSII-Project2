@@ -6,7 +6,7 @@ using System.IO;
 
 namespace Project2
 {
-    class Move
+    public class Move
     {
         //How much Damage dealt/Health healed
         public int Attack { get; set; }

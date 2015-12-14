@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Project2
 {
@@ -15,6 +17,7 @@ namespace Project2
     /// </summary>
     public class Game1 : Game
     {
+        SpriteEffects emptySpriteEffects;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         GameState currentstate;
@@ -30,7 +33,7 @@ namespace Project2
         //Enemy Sprites
         Texture2D PurpleEvilDragon, RobotSnowFrog;
         //Background Sprites
-        Texture2D DiamondWorld, CampfireBackground;
+        Texture2D DiamondWorld, CampfireBackground, TownBack, ForestBack;
 
         //Potions
         Potions RedPotion, GreenPotion, BluePotion, OrangePotion, YellowPotion, PurplePotion, MilkPotion, BlackPetalPotion;
@@ -42,6 +45,17 @@ namespace Project2
         float currentTime;
         int PlayerTarget;
         bool targetting;
+
+        string BattleLog;
+
+        //Sound
+        SoundEffect sfxExplosion;
+        SoundEffect Damage;
+        SoundEffect songAlien;
+        SoundEffect songHappy;
+        SoundEffect songPoison;
+
+
 
         Button startB, exitB, howPlayB, mainMenuB, campfiretestb;
         List<Button> spells;
@@ -90,7 +104,7 @@ namespace Project2
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
+            GenericEnemy.Name = "Monster";
             base.Initialize();
             //Creates characters on initalization
             //Needs some sort of file reader beforehand to input stats
@@ -100,6 +114,8 @@ namespace Project2
             currentTime = 0;
             PlayerTarget = -1;
             targetting = false;
+
+            BattleLog = "BATTLELOG:";
 
             RedPotion = new Potions(0, RedBottle);
             GreenPotion = new Potions(1, GreenBottle);
@@ -176,6 +192,10 @@ namespace Project2
 
             // TODO: use this.Content to load your game content here
 
+            //Songs
+
+
+
             //Main Menu Assets
             main = Content.Load<Texture2D>(@"UI\MainMenu");
             start = Content.Load<Texture2D>(@"UI\Start");
@@ -222,6 +242,8 @@ namespace Project2
             //Background
             DiamondWorld = Content.Load<Texture2D>(@"BackgroundSprites\DiamondWORLD"); //slight filename change
             CampfireBackground = Content.Load<Texture2D>(@"BackgroundSprites\Campfirebackground");
+            TownBack = Content.Load<Texture2D>(@"BackgroundSprites\TownWORLD");
+            ForestBack = Content.Load<Texture2D>(@"BackgroundSprites\BackGround");
             IsMouseVisible = true;
 
             Buttons();
@@ -288,35 +310,42 @@ namespace Project2
 
                     if (turn == 2 && PlayerTarget != -1)
                     {
+
                         targetting = false;
-                        if(spells[0].Click == true)
+                        if (spells[0].Click == true)
                         {
                             PlayerMove(HealerObj, testHeal, null);
                             spells[0].Click = false;
                         }
-                        else if(spells[1].Click == true && PlayerTarget != 5)
+                        else if (spells[1].Click == true && PlayerTarget != 5)
                         {
-                            switch(PlayerTarget)
+                            switch (PlayerTarget)
                             {
                                 case 0:
                                     PlayerMove(HealerObj, testTargetHeal, HealerObj);
+                                    UpdateText(HealerObj, testTargetHeal, HealerObj, gameTime);
                                     break;
                                 case 1:
                                     PlayerMove(HealerObj, testTargetHeal, MageObj);
+                                    UpdateText(HealerObj, testTargetHeal, MageObj , gameTime);
                                     break;
                                 case 2:
                                     PlayerMove(HealerObj, testTargetHeal, TankObj);
+                                    UpdateText(HealerObj, testTargetHeal, TankObj, gameTime);
                                     break;
                                 case 3:
                                     PlayerMove(HealerObj, testTargetHeal, DpsObj);
+                                    UpdateText(HealerObj, testTargetHeal, DpsObj, gameTime);
                                     break;
                                 case 4:
                                     PlayerMove(HealerObj, testTargetHeal, GenericEnemy);
+                                    UpdateText(HealerObj, testTargetHeal, GenericEnemy, gameTime);
                                     break;
                             }
                             spells[1].Click = false;
                         }
                         PlayerTarget = -1;
+                        
                         if (HealerObj.curHealth > HealerObj.Health)
                         {
                             HealerObj.curHealth = HealerObj.Health;
@@ -333,9 +362,14 @@ namespace Project2
                         {
                             DpsObj.curHealth = DpsObj.Health;
                         }
+                        UpdateText(HealerObj, testHeal, HealerObj, gameTime);
+
+
+                        //AI MOVES
                         if (TankObj.curHealth > 0)
                         {
                             PlayerMove(TankObj, testBash, GenericEnemy);
+                            UpdateText(TankObj, testBash, GenericEnemy, gameTime);
                         }
                         else
                         {
@@ -344,6 +378,7 @@ namespace Project2
                         if (MageObj.curHealth > 0)
                         {
                             PlayerMove(MageObj, testCast, GenericEnemy);
+                            UpdateText(MageObj, testCast, GenericEnemy, gameTime);
                         }
                         else
                         {
@@ -352,6 +387,7 @@ namespace Project2
                         if (DpsObj.curHealth > 0)
                         {
                             PlayerMove(DpsObj, testSlash, GenericEnemy);
+                            UpdateText(DpsObj, testSlash, GenericEnemy, gameTime);
                         }
                         else
                         {
@@ -365,10 +401,12 @@ namespace Project2
                                 if (rand.Next(0, 2) == 0)
                                 {
                                     EnemyMove(GenericEnemy, testCannon);
+                                    UpdateText(GenericEnemy, testCannon, GenericEnemy, gameTime);
                                 }
                                 else
                                 {
                                     EnemyMove(GenericEnemy, testHop);
+                                    UpdateText(GenericEnemy, testHop, GenericEnemy, gameTime);
                                 }
                             }
                             else if (GenericEnemy == DragonObj)
@@ -376,10 +414,12 @@ namespace Project2
                                 if (rand.Next(0, 2) == 0)
                                 {
                                     EnemyMove(GenericEnemy, testFireBreath);
+                                    UpdateText(GenericEnemy, testFireBreath, GenericEnemy, gameTime);
                                 }
                                 else
                                 {
                                     EnemyMove(GenericEnemy, testClaw);
+                                    UpdateText(GenericEnemy, testClaw, GenericEnemy, gameTime);
                                 }
                             }
                         }
@@ -400,14 +440,14 @@ namespace Project2
                             {
                                 if (rand.Next(0, 2) > 0)
                                 {
-                                    if(HealerObj.inventory[0] == null)
+                                    if (HealerObj.inventory[0] == null)
                                     {
                                         int potionRecieved = rand.Next(0, 75);
-                                        if(potionRecieved < 10)
+                                        if (potionRecieved < 10)
                                         {
                                             HealerObj.inventory[0] = RedPotion;
                                         }
-                                        else if(potionRecieved < 20)
+                                        else if (potionRecieved < 20)
                                         {
                                             HealerObj.inventory[0] = GreenPotion;
                                         }
@@ -508,42 +548,6 @@ namespace Project2
                                             HealerObj.inventory[2] = BlackPetalPotion;
                                         }
                                     }
-                                    else if (HealerObj.inventory[3] == null)
-                                    {
-                                        int potionRecieved = rand.Next(0, 75);
-                                        if (potionRecieved < 10)
-                                        {
-                                            HealerObj.inventory[3] = RedPotion;
-                                        }
-                                        else if (potionRecieved < 20)
-                                        {
-                                            HealerObj.inventory[3] = GreenPotion;
-                                        }
-                                        else if (potionRecieved < 30)
-                                        {
-                                            HealerObj.inventory[3] = BluePotion;
-                                        }
-                                        else if (potionRecieved < 40)
-                                        {
-                                            HealerObj.inventory[3] = YellowPotion;
-                                        }
-                                        else if (potionRecieved < 50)
-                                        {
-                                            HealerObj.inventory[3] = OrangePotion;
-                                        }
-                                        else if (potionRecieved < 60)
-                                        {
-                                            HealerObj.inventory[3] = PurplePotion;
-                                        }
-                                        else if (potionRecieved < 70)
-                                        {
-                                            HealerObj.inventory[3] = MilkPotion;
-                                        }
-                                        else if (potionRecieved < 75)
-                                        {
-                                            HealerObj.inventory[3] = BlackPetalPotion;
-                                        }
-                                    }
                                 }
                                 GenericEnemy.curHealth = GenericEnemy.Health;
                                 monstersKilled++;
@@ -623,6 +627,9 @@ namespace Project2
                     break;
                 case GameState.HowtoPlay:
                     spriteBatch.Draw(rMain, mainMenuB.Rect, Color.White);
+                    spriteBatch.DrawString(font, String.Format("You play the healer in a party to fight monsters,"), new Vector2(100, 100), Color.Blue, 0, new Vector2(0, 0), 2, emptySpriteEffects, 1);
+                    spriteBatch.DrawString(font, String.Format("click the spells you want to use,"), new Vector2(100, 200), Color.Blue, 0, new Vector2(0, 0), 2, emptySpriteEffects, 1);
+                    spriteBatch.DrawString(font, String.Format(" and click the icons of the people you want to use them on."), new Vector2(100, 300), Color.Blue, 0, new Vector2(0, 0), 2, emptySpriteEffects, 1);
 
                     break;
                 case GameState.Battle:
@@ -630,11 +637,25 @@ namespace Project2
                     Rectangle recB;
                     spriteBatch.Draw(bas, recB = new Rectangle(0, 0, Stat.CONSOLEW, Stat.CONSOLEH), Color.White);
                     Rectangle recCB;
-                    spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(256, 0, Stat.BBACKW, Stat.BBACKH), Color.White);
+                    if (monstersKilled < 3)
+                    {
+                        spriteBatch.Draw(DiamondWorld, recCB = new Rectangle(256, 0, Stat.BBACKW, Stat.BBACKH), Color.White);
+                    }
+                    else if (monstersKilled < 6)
+                    {
+                        spriteBatch.Draw(TownBack, recCB = new Rectangle(256, 0, Stat.BBACKW, Stat.BBACKH), Color.White);
+                    }
+                    else
+                    {
+                        spriteBatch.Draw(ForestBack, recCB = new Rectangle(256, 0, Stat.BBACKW, Stat.BBACKH), Color.White);
+                    }
+
 
                     //Draw Combat Log
                     Rectangle recCL;
                     spriteBatch.Draw(comb, recCL = new Rectangle(272, 400, Stat.COMBW, Stat.COMBH), Color.White);
+                    
+
 
                     //Draw Inventory
                     Rectangle recINV;
@@ -646,9 +667,9 @@ namespace Project2
                         o.Draw(spriteBatch);
                     }
                     //Draw Actors
-                    
+
                     if (HealerObj.curHealth > 0) { spriteBatch.Draw(Healer, new Rectangle(304, 202, 91, 118), Color.White); }
-                    if(PlayerTarget == 0 && HealerObj.curHealth > 0)
+                    if (PlayerTarget == 0 && HealerObj.curHealth > 0)
                     {
                         spriteBatch.Draw(Healer, new Rectangle(230, 190, 80, 80), Color.Cyan);
                     }
@@ -706,7 +727,7 @@ namespace Project2
 
                     //draw health/mana 100 are place holders
                     //tank
-                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", HealerObj.Health, HealerObj.curHealth ), new Vector2(100, 36), Color.LawnGreen);
+                    spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 36), Color.LawnGreen);
                     spriteBatch.DrawString(font, String.Format("MP {1}/{0} ", HealerObj.Health, HealerObj.curHealth), new Vector2(100, 64), Color.Green); ;
                     //mage
                     spriteBatch.DrawString(font, String.Format("HP {1}/{0} ", TankObj.Health, TankObj.curHealth), new Vector2(100, 430), Color.Gold);
@@ -734,7 +755,7 @@ namespace Project2
                     spriteBatch.DrawString(font, String.Format("-30 Mp"), new Vector2(425, 635), Color.Orange);
 
                     spriteBatch.DrawString(font, String.Format("Slot0"), new Vector2(556, 600), Color.Blue);
-                    if(HealerObj.inventory[0] != null)
+                    if (HealerObj.inventory[0] != null)
                     {
                         spriteBatch.Draw(HealerObj.inventory[0].picture, new Rectangle(544, 592, 64, 64), Color.White);
                     }
@@ -749,15 +770,15 @@ namespace Project2
                     {
                         spriteBatch.Draw(HealerObj.inventory[2].picture, new Rectangle(800, 592, 64, 64), Color.White);
                     }
-                    spriteBatch.DrawString(font, String.Format("Slot3"), new Vector2(960, 600), Color.Blue);
-                    if (HealerObj.inventory[3] != null)
-                    {
-                        spriteBatch.Draw(HealerObj.inventory[3].picture, new Rectangle(928, 592, 64, 64), Color.White);
-                    }
+                    spriteBatch.DrawString(font, String.Format("Skip"), new Vector2(960, 600), Color.Blue);
+
                     //spriteBatch.DrawString(font, String.Format("Pass"), new Vector2(640, 600), Color.Blue);
                     //MonsterKillCount
                     spriteBatch.DrawString(font, String.Format("Monsters Killed: " + monstersKilled), new Vector2(30, 0), Color.Red);
 
+
+                    //BATTLE LOG
+                    spriteBatch.DrawString(font, String.Format(BattleLog), new Vector2(400, 700), Color.Red, 0, new Vector2(0, 0), 3, emptySpriteEffects, 1);
                     break;
 
 
@@ -903,13 +924,13 @@ namespace Project2
                 b.ClickUpdate(mouse);
             }
             //Insert spell action/logic in brackets
-            if (spells[0].Click == true && turn == 1 && HealerObj.curStamina >= 50) {turn = 2; PlayerTarget = 5; }
-            if (spells[1].Click == true && turn == 1 && HealerObj.curStamina >= 20) { targetting = true; spells[1].Click = false; }
+            if (spells[0].Click == true && turn == 1 && HealerObj.curStamina >= 50) { turn = 2; PlayerTarget = 5; spells[1].Click = false; }
+            if (spells[1].Click == true && turn == 1 && HealerObj.curStamina >= 20) { targetting = true; }
             if (spells[2].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[0], PlayerTarget); HealerObj.inventory[0] = null; spells[2].Click = false; }
-            if (spells[3].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[1], PlayerTarget); HealerObj.inventory[1] = null; spells[3].Click = false; }
-            if (spells[4].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[2], PlayerTarget); HealerObj.inventory[2] = null; spells[4].Click = false; }
-            if (spells[5].Click == true && turn == 1 && HealerObj.inventory[0] != null) { UsePotion(HealerObj.inventory[3], PlayerTarget); HealerObj.inventory[3] = null; spells[5].Click = false; }
-            if (spells[6].Click == true && turn == 1 && HealerObj.inventory[0] != null) { turn = 2; PlayerTarget = 5; spells[6].Click = false; }
+            if (spells[3].Click == true && turn == 1 && HealerObj.inventory[1] != null) { UsePotion(HealerObj.inventory[1], PlayerTarget); HealerObj.inventory[1] = null; spells[3].Click = false; }
+            if (spells[4].Click == true && turn == 1 && HealerObj.inventory[2] != null) { UsePotion(HealerObj.inventory[2], PlayerTarget); HealerObj.inventory[2] = null; spells[4].Click = false; }
+            if (spells[5].Click == true && turn == 1 ) { turn = 2; PlayerTarget = 5; spells[5].Click = false; }
+            if (spells[6].Click == true && turn == 1 ) { turn = 2; PlayerTarget = 5; spells[6].Click = false; }
 
         }
 
@@ -922,9 +943,9 @@ namespace Project2
             }
             //insert logic for when character is selected
             if (charSelect[0].Click == true) { if (targetting) { turn = 2; PlayerTarget = 0; charSelect[0].Click = false; } else { PlayerTarget = 0; } }
-            if (charSelect[1].Click == true) { if (targetting) { turn = 2; PlayerTarget = 1; charSelect[1].Click = false; } else { PlayerTarget = 1; } }
-            if (charSelect[2].Click == true) { if (targetting) { turn = 2; PlayerTarget = 2; charSelect[2].Click = false; } else { PlayerTarget = 2; } }
-            if (charSelect[3].Click == true) { if (targetting) { turn = 2; PlayerTarget = 3; charSelect[3].Click = false; } else { PlayerTarget = 3; } }
+            if (charSelect[3].Click == true) { if (targetting) { turn = 2; PlayerTarget = 1; charSelect[1].Click = false; } else { PlayerTarget = 1; } }
+            if (charSelect[1].Click == true) { if (targetting) { turn = 2; PlayerTarget = 2; charSelect[2].Click = false; } else { PlayerTarget = 2; } }
+            if (charSelect[2].Click == true) { if (targetting) { turn = 2; PlayerTarget = 3; charSelect[3].Click = false; } else { PlayerTarget = 3; } }
             if (charSelect[4].Click == true) { if (targetting) { turn = 2; PlayerTarget = 4; charSelect[4].Click = false; } else { PlayerTarget = 4; } }
         }
 
@@ -1097,5 +1118,15 @@ namespace Project2
                 }
             }
         }
+        public void UpdateText(Actor person, Move moveIn, Actor target, GameTime gameTime)
+        {
+            float ElapsedTime = 0;
+            BattleLog = person.Name + " used " + moveIn.Name + " with " + target.Name + ".";
+            while (ElapsedTime  < 1)
+            {
+                ElapsedTime += (float)gameTime.ElapsedGameTime.Milliseconds;
+            }
+        }
+
     }
 }

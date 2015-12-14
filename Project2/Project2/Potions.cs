@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Project2
 {
-    class Potions : Items
+    public class Potions : Items
     {
         //All colored besides black are randomized, milk and black have set stats
         public bool Aoe { get; set; }
