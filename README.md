@@ -1,3 +1,3 @@
-# The Attempt
+# Medic!
 ### This Project is no longer Maintained 
-As a team of 4 we wanted to make a maze game that used ai and game machanics to convey urgency and fear to the player.
+As a team of 4 we wanted to create a game that really emphisized the role of a medic in a role playing game universe.
